@@ -18,6 +18,6 @@
     <select id="doLogin" resultType="com.nhnacademy.jdbc.board.user.domain.User">
         select *
         from Users
-        where id = #{id} AND password = #{password}
+        where user_id = #{id} AND user_pw = #{password}
     </select>
 </mapper>

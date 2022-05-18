@@ -30,7 +30,7 @@ public class IndexController {
     public String index(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         if(Objects.isNull(session)) {
-            return"login/loginForm";
+            return "login/loginForm";
         }
         return "index/index";
     }
@@ -43,6 +43,7 @@ public class IndexController {
             req.getSession().setAttribute("id", id);
             return "redirect:/";
         }
+        req.getSession().invalidate();
         return "login/loginForm";
     }
 }
