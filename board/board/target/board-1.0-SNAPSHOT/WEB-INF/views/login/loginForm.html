@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/" method="post">
-    <h3>ID<input type="text" name="logId"></h3>
-    <h3>PW<input type="password" name="logPw"></h3>
+<form action="/login" method="post">
+    <span th:text="ID"></span><input type="text" name="logId">
+    <span th:text="PW"></span><input type="text" name="logId">
     <input type="submit" value="login">
 </form>
 </body>
