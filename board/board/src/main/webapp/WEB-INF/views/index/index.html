@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
-<span><a href="/board">Go Board</a></span><br />
-<span th:if="${session.get} lt 1"><a href="/login">Login</a></span>
-<span th:if="${session.get} lt 0"><a href="/logout"/>Logout</a></span>
+<a th:href="@{/board}">Go Board<br />
+<a th:href="@{/login}">Go Login<br />
 </body>
 </html>

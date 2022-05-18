@@ -16,9 +16,6 @@ import java.util.Objects;
 public class IndexController {
     @GetMapping(value = {"/","/index.nhn"})
     public String index(HttpServletRequest req) {
-        if (Objects.isNull(req.getSession(false))) {
-            return "index/index";
-        }
         return "index/index";
     }
 }

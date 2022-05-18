@@ -23,7 +23,7 @@ public class LoginControlLer {
         if(Objects.isNull(session)) {
             return "login/loginForm";
         }
-        return "redirect:/";
+        return "login/welcome";
     }
 
     @PostMapping("/login")
@@ -32,14 +32,8 @@ public class LoginControlLer {
                         HttpServletRequest req) {
         if (userService.successLogin(id, pw)) {
             req.getSession().setAttribute("id", id);
-            return "redirect:/";
+            return "redirect:/login";
         }
-        return "redirect:/login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest req) {
-        req.getSession().invalidate();
-        return "redirect:/";
+        return "login/loginForm";
     }
 }
