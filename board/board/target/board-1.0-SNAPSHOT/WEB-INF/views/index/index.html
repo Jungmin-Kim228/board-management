@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-
-<a href="/login"><span th:text="Go Login"></span></a>
+<span><a href="/board">Go Board</a></span><br />
+<span th:if="${isLog} lt 1"><a href="/login">Login</a></span>
+<span th:if="${isLog} lt 0"><a href="/logout"/>Logout</a></span>
 </body>
 </html>
