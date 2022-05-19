@@ -41,10 +41,6 @@
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: p6spy:p6spy:3.9.1" />
           <element id="library" level="project" name="Maven: org.assertj:assertj-core:3.21.0" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-test:5.6.3" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.6.3" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-crypto:5.6.3" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.6.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">
