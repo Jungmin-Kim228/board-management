@@ -9,9 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import com.nhnacademy.jdbc.board.controller.LoginController;
-import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockitoSession;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -34,11 +36,12 @@ public class LoginControllerTest {
         when(userService.successLogin(id, pw)).thenReturn(true);
 
         MvcResult mvcResult = mockMvc.perform(
-            post("/login")
-                .param("logId", id)
-                .param("logPw", pw)).andReturn();
+                                         post("/login")
+                                             .param("logId", id)
+                                             .param("logPw", pw))
+                                     .andExpect(view().name("index/index"))
+                                     .andReturn();
 
-        assertThat(mvcResult.getModelAndView().getViewName()).isEqualTo("index/index");
         assertThat(mvcResult.getRequest().getSession(false).getAttribute("id")).isEqualTo("user");
     }
 
@@ -60,6 +63,13 @@ public class LoginControllerTest {
 
     @Test
     void logoutTest() throws Exception {
+        MockHttpSession session = new MockHttpSession();
 
+        MvcResult mvcResult = mockMvc.perform(get("/logout").session(session))
+            .andExpect(view().name("index/index"))
+            .andReturn();
+
+        assertThat(mvcResult.getRequest().getSession(false)).isNull();
+        assertThat(mvcResult.getModelAndView().getModel().get("user")).isEqualTo("Guest");
     }
 }
