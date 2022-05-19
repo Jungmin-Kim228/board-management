@@ -4,20 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.UserMapper">
-<!--    <select id="selectUser" resultType="com.nhnacademy.jdbc.board.compre.domain.User">-->
-<!--        select *-->
-<!--        from Users-->
-<!--        where id = #{id}-->
-<!--    </select>-->
+    <select id="selectUser" resultType="Integer" >
+        SELECT user_no
+        FROM Users
+        WHERE user_id = #{id}
+    </select>
 
-<!--    <select id="selectUsers" resultType="com.nhnacademy.jdbc.board.compre.domain.User">-->
-<!--        select *-->
-<!--        from Users-->
-<!--    </select>-->
+    <select id="selectUsers" resultType="com.nhnacademy.jdbc.board.compre.domain.User">
+        select *
+        from Users
+    </select>
 
-<!--    <select id="doLogin" resultType="com.nhnacademy.jdbc.board.compre.domain.User">-->
-<!--        select *-->
-<!--        from Users-->
-<!--        where user_id = #{id} AND user_pw = #{password}-->
-<!--    </select>-->
+    <select id="doLogin" resultType="com.nhnacademy.jdbc.board.compre.domain.User">
+        SELECT *
+        FROM Users
+        WHERE user_id = #{id} AND user_pw = #{password}
+    </select>
 </mapper>

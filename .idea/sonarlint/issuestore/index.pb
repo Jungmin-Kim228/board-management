@@ -21,8 +21,6 @@ v
 Fboard/board/src/main/webapp/WEB-INF/views/board/boardRegisterForm.html,7\5\75d003b2049c49b254aea475e9577f8c749ad249
 ä
 Zboard/board/src/main/java/com/nhnacademy/jdbc/board/interceptor/LoginCheckInterceptor.java,1\0\10658738ca9b7f0ce80fafc7c13062832959a90f
-É
-Sboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/PostService.java,c\6\c6805a5a8a26b7880c67150801f7a151ad51a396
 è
 _board/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/impl/DefaultPostService.java,c\0\c0682ece2638e7696be8fd50b681b25bf64b9934
 n

@@ -4,28 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.PostMapper">
-<!--    <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">-->
-<!--        select *-->
-<!--        from Posts-->
-<!--        where id = #{id}-->
-<!--    </select>-->
+    <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
+        select *
+        from Posts
+        where id = #{id}
+    </select>
 
-<!--    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">-->
-<!--        select *-->
-<!--        from Posts-->
-<!--    </select>-->
+    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
+        SELECT P.post_no AS id,
+                P.post_title AS title,
+                U.user_id AS writer,
+                P.post_write_datetime AS writeDate,
+                COUNT(C.comment_no) AS commentCount
+        FROM Posts AS P
+            INNER JOIN Users AS U
+            ON P.user_no = U.user_no
+            INNER JOIN Comments AS C
+            ON P.post_no = C.post_no
+            GROUP BY P.post_no
+    </select>
 
-<!--    <insert id="insertPost">-->
-<!--        insert into Posts(id, name, created_at)-->
-<!--        values (#{id}, '${name}', #{createdAt})-->
-<!--    </insert>-->
+    <insert id="insertPost">
+        INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, post_hits)
+        VALUES (#{num}, ${Post.title}, ${Post.content}, ${Post.writeDate}, 0, 0)
+    </insert>
 
-<!--    <update id="updatePost">-->
-<!--        update Posts set name='${name}'-->
-<!--        where id = #{id}-->
-<!--    </update>-->
+    <update id="updatePost">
+        update Posts set name='${name}'
+        where id = #{id}
+    </update>
 
-<!--    <delete id="deletePost">-->
-<!--        delete from Posts where id=#{id}-->
-<!--    </delete>-->
+    <delete id="deletePost">
+        delete from Posts where id=#{id}
+    </delete>
 </mapper>
