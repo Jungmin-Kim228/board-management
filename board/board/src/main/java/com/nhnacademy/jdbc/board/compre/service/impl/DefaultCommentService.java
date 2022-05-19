@@ -6,7 +6,9 @@ import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DefaultCommentService implements CommentService {
 
     private final CommentMapper commentMapper;

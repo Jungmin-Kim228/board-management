@@ -3,7 +3,11 @@ package com.nhnacademy.jdbc.board.compre.mapper;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import java.util.List;
 import java.util.Optional;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Service;
 
+@Service
+@Mapper
 public interface CommentMapper {
 
     Optional<Comment> selectComment(int id);

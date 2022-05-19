@@ -16,7 +16,7 @@
     </tr>
     <tr align="center" th:each="post : ${allPost}">
         <td th:text="${post.id}"></td>
-        <td th:text="${post.title}"></td>
+        <td th:href="@{/content(id=${post.id})}"><span th:text="${post.title}"></span></td>
         <td th:text="${post.writer}"></td>
         <td th:text="${post.writeDate}"></td>
         <td th:text="${post.commentCount}"></td>
