@@ -28,8 +28,6 @@ public class LoginController {
             model.addAttribute("user", user);
         } else {
             model.addAttribute("user","Guest");
-        }
-        if(Objects.isNull(session)) {
             return "login/loginForm";
         }
         return "index/index";

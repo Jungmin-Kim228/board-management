@@ -60,6 +60,28 @@ public class LoginControllerTest {
     }
 
     @Test
+    void loginCheckTestSessionIsNull() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/login"))
+            .andExpect(view().name("login/loginForm"))
+            .andReturn();
+
+        assertThat(mvcResult.getModelAndView().getModel().get("user")).isEqualTo("Guest");
+    }
+
+    @Test
+    void loginCheckTestSessionisNonNull() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("id", "user");
+
+        MvcResult mvcResult = mockMvc.perform(get("/login").session(session))
+            .andExpect(view().name("index/index"))
+            .andReturn();
+
+        assertThat(mvcResult.getRequest().getSession(false).getAttribute("id")).isEqualTo("user");
+        assertThat(mvcResult.getModelAndView().getModel().get("user")).isEqualTo("user");
+    }
+
+    @Test
     void logoutTest() throws Exception {
         MockHttpSession session = new MockHttpSession();
 

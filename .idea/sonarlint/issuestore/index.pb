@@ -1,8 +1,6 @@
 
 z
 Jboard/board/src/main/java/com/nhnacademy/jdbc/board/config/RootConfig.java,f\e\fe4dbc3d0e37713c20324e671d54cb56c88917b7
-}
-Mboard/board/src/main/java/com/nhnacademy/jdbc/board/config/MybatisConfig.java,d\9\d9f1469ca947882216c9ea5e72d241b3ecf00027
 y
 Iboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebConfig.java,3\8\38749ad4a92ad4f6d50ca6056c097a648f7961ae
 Å
