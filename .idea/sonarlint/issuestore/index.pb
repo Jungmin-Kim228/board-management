@@ -11,10 +11,6 @@ Qboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebAppInitializer.ja
 Wboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/WebControllerAdvice.java,4\4\44601d0e07596a3d53f1fef12f03182ac60a017f
 t
 Dboard/board/src/main/webapp/WEB-INF/views/board/boardModifyForm.html,d\9\d92cec4347b5ddd7964ee393a571e5ff7c11ab4f
-ƒ
-Sboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/IndexController.java,6\a\6a6dc3e81ba7ccaa8c410644a9b31d1b8b7f2f52
-ƒ
-Sboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/LoginController.java,6\4\64de1c0c2a2ca86f50ec934439ef3f8d42225acb
 v
 Fboard/board/src/main/webapp/WEB-INF/views/board/boardRegisterForm.html,7\5\75d003b2049c49b254aea475e9577f8c749ad249
 Š
@@ -23,10 +19,6 @@ n
 >board/board/src/main/webapp/WEB-INF/views/board/boardView.html,e\d\ed5d9450bb144a60d5bd49c39542911139eab97d
 n
 >board/board/src/main/webapp/WEB-INF/views/login/loginForm.html,2\9\297f217908ac1cd5d343b8adb326d14cf60d5adf
-|
-Lboard/board/src/test/java/com/nhnacademy/jdbc/board/IndexControllerTest.java,e\b\eb58e4e48250da9786189aedbd87cbd7cf7320f2
-|
-Lboard/board/src/test/java/com/nhnacademy/jdbc/board/LoginControllerTest.java,0\5\054a4ecd6627d5ead448f02da8f4a7139652a72e
 ~
 Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java,0\0\00964d38634a50725882ec1f34b4d7367689a13f
 j
