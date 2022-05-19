@@ -1,11 +1,15 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
+import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
+import com.nhnacademy.jdbc.board.compre.service.UserService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +17,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultPostService implements PostService {
     private final PostMapper postMapper;
+    private final UserService userService;
 
-    public DefaultPostService(PostMapper postMapper) {
+    public DefaultPostService(PostMapper postMapper, DefaultUserService userService) {
         this.postMapper = postMapper;
+        this.userService = userService;
     }
 
     @Override
@@ -28,7 +34,15 @@ public class DefaultPostService implements PostService {
 
     @Override
     public List<Post> getPosts() {
-        return postMapper.selectPosts();
+        List<PostDAO> postDao = postMapper.selectPosts();
+        List<Post> posts = new ArrayList<>();
+        for (PostDAO postDAO : postDao) {
+            posts.add(new Post(postDAO.getPostNo(),
+                postDAO.getPostTitle(), (userService.getUserId(postDAO.getUserNo())),
+                postDAO.getPostContent(), postDAO.getPostWriteDatetime(), postDAO.getPostHits()
+                ));
+        }
+        return posts;
     }
 
     @Override

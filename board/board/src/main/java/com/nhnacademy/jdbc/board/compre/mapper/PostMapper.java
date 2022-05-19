@@ -1,5 +1,6 @@
 package com.nhnacademy.jdbc.board.compre.mapper;
 
+import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public interface PostMapper {
 
     Optional<Post> selectPost(int id);
 
-    List<Post> selectPosts();
+    List<PostDAO> selectPosts();
 
     void postRegister(@Param("Post") Post post, @Param("num") int num);
 
