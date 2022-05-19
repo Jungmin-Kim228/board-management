@@ -31,6 +31,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public boolean successLogin(String id, String password) {
-        return !Objects.isNull(userMapper.doLogin(id, password));
+        return userMapper.doLogin(id, password).isPresent();
     }
+
 }
