@@ -17,9 +17,9 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(String id) {
+    public Integer getUser(String id) {
         if(Objects.isNull(userMapper.selectUser(id))) {
-            return Optional.empty();
+            return 0;
         }
         return userMapper.selectUser(id);
     }
