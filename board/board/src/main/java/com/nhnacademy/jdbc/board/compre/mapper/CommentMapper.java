@@ -16,7 +16,7 @@ public interface CommentMapper {
 
     List<CommentDAO> selectComments(@Param("id") int id);
 
-    void commentRegister(Comment comment);
+    void commentRegister(@Param("postNo") int postNo, @Param("userNo") int userNo, @Param("comment") String comment);
 
     void commentUpdate(@Param("id") int id, @Param("content") String content);
 

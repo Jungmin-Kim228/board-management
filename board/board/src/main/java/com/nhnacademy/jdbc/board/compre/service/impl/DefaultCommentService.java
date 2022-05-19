@@ -42,8 +42,8 @@ public class DefaultCommentService implements CommentService {
     }
 
     @Override
-    public void register(Comment comment) {
-        commentMapper.commentRegister(comment);
+    public void register(int postNo, int userNo, String comment) {
+        commentMapper.commentRegister(postNo, userNo, comment);
     }
 
     @Override

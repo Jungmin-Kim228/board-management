@@ -1,7 +1,6 @@
 package com.nhnacademy.jdbc.board.compre.domain;
 
 import java.util.Date;
-import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 

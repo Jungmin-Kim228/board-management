@@ -7,9 +7,20 @@
 <body>
 <button onclick="location.href='/boardModify'">Post Modify</button>
 <button onclick="location.href='/boardDelete'">Post Delete</button>
-<h2>TITLE <span th:text="${post.title}"></span></h2>
+<h2>[TITLE] <span th:text="${post.title}"></span></h2>
+<h4>[NICKNAME] <span th:text="${post.writer}"></span></h4>
+<span>[WriteDate]</span><span th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></span>
+<span>[ModifyDate]</span><span th:text="${#dates.format(post.modifyDate,'yyyy-MM-dd HH:mm:ss')}"></span>
+<br />
 <div style="border: 1px dashed;  width: 600px; height: 200px; padding: 10px;">
 <span th:text="${post.content}"></span>
+</div>
+<br />
+<div style="border: 1px solid;  width: 400px; height: 50px; padding: 10px;">
+    <form th:action="'/commentRegister?id='+ ${post.id}" method="post">
+        <input type="text" name="comment" ><br />
+        <input type="submit" name="button" value="register">
+    </form>
 </div>
 <h3>Comments List</h3>
 <table text-align="center">

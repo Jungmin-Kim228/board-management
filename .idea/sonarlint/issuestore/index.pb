@@ -5,7 +5,5 @@ Wboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/WebControllerAdv
 Lboard/board/src/test/java/com/nhnacademy/jdbc/board/IndexControllerTest.java,e\b\eb58e4e48250da9786189aedbd87cbd7cf7320f2
 |
 Lboard/board/src/test/java/com/nhnacademy/jdbc/board/LoginControllerTest.java,0\5\054a4ecd6627d5ead448f02da8f4a7139652a72e
-{
-Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/User.java,d\7\d7d846b0d13c08f7ea8ae29205462a8e859d1f77
 C
 board/board/pom.xml,d\d\dd18d7a34156b1a580b12fc7c876c80edae336c3

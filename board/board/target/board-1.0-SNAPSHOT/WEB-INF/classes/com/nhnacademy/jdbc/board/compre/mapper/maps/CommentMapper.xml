@@ -17,8 +17,8 @@
     </select>
 
     <insert id="commentRegister">
-        insert into Comments(id, name, created_at)
-        values (#{id}, '${name}', #{createdAt})
+        insert into Comments(post_no, user_no, comment_content)
+        values (#{postNo}, ${userNo}, '${comment}')
     </insert>
 
     <update id="commentUpdate">

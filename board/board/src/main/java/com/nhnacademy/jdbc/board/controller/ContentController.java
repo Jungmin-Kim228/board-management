@@ -40,6 +40,14 @@ public class ContentController {
         return "content/boardContent";
     }
 
+    @PostMapping("/commentRegister")
+    public String commentRegister(@RequestParam("id") int id,
+                                  @RequestParam("comment") String comment,
+                                  HttpServletRequest req) {
+        commentService.register(id,userService.getUser((String)req.getSession(false).getAttribute("id")) ,comment);
+        return "redirect:/content?id=" + id;
+    }
+
     @PostMapping("/comment/{commentNo}")
     public String commentModifyOrDelete(@PathVariable int commentNo,
                                         @RequestParam("button") String button,

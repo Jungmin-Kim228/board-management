@@ -5,7 +5,6 @@ import com.nhnacademy.jdbc.board.compre.mapper.UserMapper;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service

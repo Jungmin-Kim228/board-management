@@ -10,7 +10,7 @@ public interface CommentService {
 
     List<Comment> getComments(int id);
 
-    void register(Comment comment);
+    void register(int postNo, int userNo, String comment);
 
     void update(int id, String content);
 
