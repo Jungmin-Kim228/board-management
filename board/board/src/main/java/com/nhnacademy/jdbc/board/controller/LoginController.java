@@ -18,6 +18,7 @@ public class LoginController {
     public LoginController(DefaultUserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/login")
     public String loginCheck(HttpServletRequest req,
                              Model model) {
