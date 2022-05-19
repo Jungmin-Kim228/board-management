@@ -6,8 +6,10 @@ import com.nhnacademy.jdbc.board.compre.service.PostService;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class DefaultPostService implements PostService {
     private final PostMapper postMapper;
@@ -30,8 +32,8 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public void register(Post post) {
-        postMapper.postRegister(post);
+    public void register(Post post, int num) {
+        postMapper.postRegister(post, num);
     }
 
     @Override
@@ -43,4 +45,5 @@ public class DefaultPostService implements PostService {
     public void delete(int id) {
         postMapper.postDelete(id);
     }
+
 }

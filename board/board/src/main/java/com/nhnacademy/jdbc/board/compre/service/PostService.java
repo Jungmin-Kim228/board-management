@@ -9,7 +9,7 @@ public interface PostService {
 
     List<Post> getPosts();
 
-    void register(Post post);
+    void register(Post post, int num);
 
     void update(int id, Post post);
 

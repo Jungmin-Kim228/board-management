@@ -7,6 +7,7 @@ import lombok.Setter;
 public class Post {
 
     @Getter
+    @Setter
     private int id;
 
     @Getter
@@ -14,10 +15,14 @@ public class Post {
     private String title;
 
     @Getter
-    private final String writer;
+    @Setter
+    private String content;
 
     @Getter
-    private final Date writeDate;
+    private String writer;
+
+    @Getter
+    private Date writeDate;
 
     @Getter
     @Setter
@@ -27,11 +32,18 @@ public class Post {
     @Setter
     private int commentCount;
 
-    public Post(String title, String writer, Date writeDate) {
+    public Post(int id, String title, String writer, Date writeDate, int commentCount) {
+        this.id = id;
         this.title = title;
         this.writer = writer;
         this.writeDate = writeDate;
         this.modifyDate = null;
-        this.commentCount = 0;
+        this.commentCount = commentCount;
+    }
+
+    public Post(String title, String content, Date writeDate) {
+        this.title = title;
+        this.content = content;
+        this.writeDate = writeDate;
     }
 }

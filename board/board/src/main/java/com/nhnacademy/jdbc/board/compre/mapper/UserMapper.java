@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM Users WHERE id = #{id}")
+    @Select("SELECT * FROM Users WHERE user_id = #{id}")
     Optional<User> selectUser(@Param("id") String id);
 
     @Select("SELECT * FROM Users")
