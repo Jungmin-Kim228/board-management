@@ -4,20 +4,15 @@ import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import java.util.List;
 import java.util.Optional;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultType;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
 @Service
 @Mapper
 public interface PostMapper {
 
-    Optional<Post> selectPost(int id);
+    Optional<PostDAO> selectPost(@Param("id") int id);
 
     List<PostDAO> selectPosts();
 

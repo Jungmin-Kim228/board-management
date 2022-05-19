@@ -18,6 +18,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         urls.add("/WEB-INF/views/login/loginForm.html");
         urls.add("/board");
         urls.add("/WEB-INF/views/board/boardView.html");
+        urls.add("/content");
+        urls.add("/WEB-INF/views/content/boardContent.html");
     }
 
     @Override

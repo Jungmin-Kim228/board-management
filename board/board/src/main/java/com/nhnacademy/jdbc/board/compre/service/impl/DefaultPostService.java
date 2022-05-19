@@ -29,7 +29,10 @@ public class DefaultPostService implements PostService {
         if (Objects.isNull(postMapper.selectPost(id))) {
             return Optional.empty();
         }
-        return postMapper.selectPost(id);
+        PostDAO pod = postMapper.selectPost(id).get();
+        return Optional.of(new Post(pod.getPostNo(),
+            pod.getPostTitle(), (userService.getUserId(pod.getUserNo())),
+            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostHits()));
     }
 
     @Override

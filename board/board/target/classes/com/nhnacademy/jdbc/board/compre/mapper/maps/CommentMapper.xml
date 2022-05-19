@@ -10,9 +10,10 @@
         where id = #{id}
     </select>
 
-    <select id="selectComments" resultType="com.nhnacademy.jdbc.board.compre.domain.Comment">
-        select *
+    <select id="selectComments" resultType="com.nhnacademy.jdbc.board.compre.dao.CommentDAO">
+        select comment_no as commentNo, post_no as postNo, user_no as userNo, comment_content as commentContent
         from Comments
+        where post_no = #{id}
     </select>
 
     <insert id="commentRegister">

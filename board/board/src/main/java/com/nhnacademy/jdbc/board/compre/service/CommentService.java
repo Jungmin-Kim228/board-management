@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface CommentService {
     Optional<Comment> getComment(int id);
 
-    List<Comment> getComments();
+    List<Comment> getComments(int id);
 
     void register(Comment comment);
 

@@ -16,9 +16,9 @@
     </tr>
     <tr align="center" th:each="post : ${allPost}">
         <td th:text="${post.id}"></td>
-        <td th:href="@{/content(id=${post.id})}"><span th:text="${post.title}"></span></td>
+        <td><a th:href="@{/content(id=${post.id})}" th:text="${post.title}"></a></td>
         <td th:text="${post.writer}"></td>
-        <td th:text="${post.writeDate}"></td>
+        <td th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${post.commentCount}"></td>
     </tr>
 

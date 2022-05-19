@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.PostMapper">
-    <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        select *
+    <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
+        select post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
+               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
         from Posts
-        where id = #{id}
+        where post_no = #{id}
     </select>
 
     <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">

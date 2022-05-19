@@ -1,8 +1,13 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
+import com.nhnacademy.jdbc.board.compre.dao.CommentDAO;
+import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
+import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.mapper.CommentMapper;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
+import com.nhnacademy.jdbc.board.compre.service.UserService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,9 +17,11 @@ import org.springframework.stereotype.Service;
 public class DefaultCommentService implements CommentService {
 
     private final CommentMapper commentMapper;
+    private final UserService userService;
 
-    public DefaultCommentService(CommentMapper commentMapper) {
+    public DefaultCommentService(CommentMapper commentMapper, DefaultUserService userService) {
         this.commentMapper = commentMapper;
+        this.userService = userService;
     }
 
     @Override
@@ -26,8 +33,14 @@ public class DefaultCommentService implements CommentService {
     }
 
     @Override
-    public List<Comment> getComments() {
-        return commentMapper.selectComments();
+    public List<Comment> getComments(int id) {
+        List<CommentDAO> com = commentMapper.selectComments(id);
+        List<Comment> comments = new ArrayList<>();
+        for (CommentDAO commentDAO : com) {
+            comments.add(new Comment((userService.getUserId(commentDAO.getUserNo())),
+                commentDAO.getCommentContent()));
+        }
+        return comments;
     }
 
     @Override
