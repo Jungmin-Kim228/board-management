@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardView</title>
+</head>
+<body>
+<h2 align="center">Board VIEW</h2>
+<table border="1" align="center">
+    <tr>
+        <th>No</th>
+        <th>Title</th>
+        <th>Writer</th>
+        <th>WriteDate</th>
+        <th>CommentCount</th>
+    </tr>
+    <tr align="center" th:each="post : ${allPost}">
+        <td th:text="${post.id}"></td>
+        <td th:text="${post.title}"></td>
+        <td th:text="${post.writer}"></td>
+        <td th:text="${post.writeDate}"></td>
+        <td th:text="${post.commentCount}"></td>
+    </tr>
+</table>
+<button onclick="location.href='/boardRegister'">Post Register</button>
+<h3><a href="/">Go Home</a></h3>
+</body>
+</html>

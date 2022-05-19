@@ -7,8 +7,6 @@ y
 Iboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebConfig.java,3\8\38749ad4a92ad4f6d50ca6056c097a648f7961ae
 
 Qboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebAppInitializer.java,b\b\bb8eb342c55b32b72bc43d99045835ef180841cb
-’
-bboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/impl/DefaultCommentService.java,1\2\12f306f5f00450863b35aef2112dd3a677f50047
 ‡
 Wboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/WebControllerAdvice.java,4\4\44601d0e07596a3d53f1fef12f03182ac60a017f
 t
@@ -21,8 +19,6 @@ v
 Fboard/board/src/main/webapp/WEB-INF/views/board/boardRegisterForm.html,7\5\75d003b2049c49b254aea475e9577f8c749ad249
 Š
 Zboard/board/src/main/java/com/nhnacademy/jdbc/board/interceptor/LoginCheckInterceptor.java,1\0\10658738ca9b7f0ce80fafc7c13062832959a90f
-
-_board/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/impl/DefaultPostService.java,c\0\c0682ece2638e7696be8fd50b681b25bf64b9934
 n
 >board/board/src/main/webapp/WEB-INF/views/board/boardView.html,e\d\ed5d9450bb144a60d5bd49c39542911139eab97d
 n
@@ -33,3 +29,11 @@ Lboard/board/src/test/java/com/nhnacademy/jdbc/board/IndexControllerTest.java,e
 Lboard/board/src/test/java/com/nhnacademy/jdbc/board/LoginControllerTest.java,0\5\054a4ecd6627d5ead448f02da8f4a7139652a72e
 ~
 Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java,0\0\00964d38634a50725882ec1f34b4d7367689a13f
+j
+:board/board/src/main/webapp/WEB-INF/views/index/index.html,4\6\46988af0802e96a940c8d94b11318ca6afcc12d8
+{
+Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Post.java,e\8\e88f241fc970f7790391242665ab424c10950cae
+{
+Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/User.java,d\7\d7d846b0d13c08f7ea8ae29205462a8e859d1f77
+C
+board/board/pom.xml,d\d\dd18d7a34156b1a580b12fc7c876c80edae336c3

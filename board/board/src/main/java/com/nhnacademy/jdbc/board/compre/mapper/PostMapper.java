@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 @Mapper
 public interface PostMapper {
 
-    @Select("SELECT * FROM Posts WHERE id = #{id}")
     Optional<Post> selectPost(int id);
 
     List<Post> selectPosts();

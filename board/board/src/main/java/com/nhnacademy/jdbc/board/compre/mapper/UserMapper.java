@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Mapper
 public interface UserMapper {
-    Integer selectUser(@Param("id") String id);
+    Optional<User> selectUser(@Param("id") String id);
 
     List<User> selectUsers();
 

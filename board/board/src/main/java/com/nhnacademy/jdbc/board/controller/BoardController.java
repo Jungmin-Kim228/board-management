@@ -45,9 +45,9 @@ public class BoardController {
     public String boardRegister(@RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
                                 HttpServletRequest req) {
-        Integer user = userService.getUser(
+        Optional<User> user = userService.getUser(
             (String)req.getSession(false).getAttribute("id"));
-        postService.register(new Post(title, content, new Timestamp(new Date().getTime())), user);
+        postService.register(new Post(title, content, new Timestamp(new Date().getTime())), user.get().getUserNum());
         return "redirect:/board";
     }
 
