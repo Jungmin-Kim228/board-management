@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 @Mapper
 public interface CommentMapper {
 
-    Optional<Comment> selectComment(int id);
+    Optional<CommentDAO> selectComment(@Param("id") int id);
 
     List<CommentDAO> selectComments(@Param("id") int id);
 
     void commentRegister(Comment comment);
 
-    void commentUpdate(int id, Comment comment);
+    void commentUpdate(@Param("id") int id, @Param("content") String content);
 
-    void commentDelete(int id);
+    void commentDelete(@Param("id") int id);
 }

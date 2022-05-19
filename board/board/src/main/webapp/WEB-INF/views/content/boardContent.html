@@ -7,11 +7,11 @@
 <body>
 <button onclick="location.href='/boardModify'">Post Modify</button>
 <button onclick="location.href='/boardDelete'">Post Delete</button>
-<h2>제목 <span th:text="${post.title}"></span></h2>
+<h2>TITLE <span th:text="${post.title}"></span></h2>
 <div style="border: 1px dashed;  width: 600px; height: 200px; padding: 10px;">
 <span th:text="${post.content}"></span>
 </div>
-<h3>댓글 목록</h3>
+<h3>Comments List</h3>
 <table text-align="center">
     <tr>
         <th>NickName</th>
@@ -21,7 +21,7 @@
 <tr th:each="comment : ${comment}" align="center">
     <td th:text="${comment.commentWriter}"></td>
     <td th:text="${comment.content}"></td>
-    <form>
+    <form th:action="'/comment/' + ${comment.commentNo}" method="post">
     <td>
         <input type="submit" name="button" value="Modify">
         <input type="submit" name="button" value="Delete">

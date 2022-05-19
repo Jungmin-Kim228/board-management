@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comment Modify</title>
+</head>
+<body>
+<form th:action="'/commentModify/' + ${modifyComment.commentNo}" method="post">
+    <span th:text="Content"></span><textarea cols = "50" rows = "10" name="commentContent"></textarea><br/>
+    <input type="submit" value="Modify">
+</form>
+</body>
+</html>

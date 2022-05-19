@@ -4,15 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Comment {
+    @Getter
+    private final int commentNo;
 
     @Getter
-    private String commentWriter;
+    private final String commentWriter;
 
     @Getter
     @Setter
     private String content;
 
-    public Comment(String commentWriter, String content) {
+    public Comment(int commentNo, String commentWriter, String content) {
+        this.commentNo = commentNo;
         this.commentWriter = commentWriter;
         this.content = content;
     }
