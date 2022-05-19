@@ -15,9 +15,9 @@
         from Users
     </select>
 
-    <select id="doLogin" resultType="com.nhnacademy.jdbc.board.compre.domain.User">
-        select *
-        from Users
-        where user_id = #{id} AND user_pw = #{password}
-    </select>
+<!--    <select id="doLogin" resultType="com.nhnacademy.jdbc.board.compre.domain.User">-->
+<!--        select *-->
+<!--        from Users-->
+<!--        where user_id = #{id} AND user_pw = #{password}-->
+<!--    </select>-->
 </mapper>
