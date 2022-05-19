@@ -18,7 +18,7 @@ public interface PostMapper {
 
     void postRegister(@Param("Post") Post post, @Param("num") int num);
 
-    void postUpdate(int id, Post post);
+    void postUpdate(@Param("id") int id, @Param("title") String title, @Param("content") String content);
 
-    void postDelete(int id);
+    void postDelete(@Param("id") int id);
 }

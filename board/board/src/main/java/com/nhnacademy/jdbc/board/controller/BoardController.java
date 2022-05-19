@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,20 +53,32 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    @GetMapping("/boardModify")
-    public String readyBoardModify() {
-        return "board/boardModifyForm";
+    @GetMapping("/boardModify/{postNo}")
+    public String readyBoardModify(@PathVariable("postNo") int postNo,
+                                   HttpServletRequest req,
+                                   Model model) {
+        if(req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter())) {
+            model.addAttribute("postNo", postNo);
+            return "board/boardModifyForm";
+        }
+        return "redirect:/content?id=" + postNo;
     }
 
-    @PostMapping("/boardModify")
-    public String boardModify() {
+    @PostMapping("/boardModify/{postNo}")
+    public String boardModify(@PathVariable("postNo") int postNo,
+                              @RequestParam("modifyTitle") String title,
+                              @RequestParam("modifyContent") String content) {
+        postService.update(postNo, title, content);
         return "redirect:/board";
     }
 
-    // todo (not todo) added method
-//    @PostMapping("/boardDelete")
-//    public String boardDelete(@RequestParam("which") int num) {
-//        postService.delete(num);
-//        return "redirect:/board";
-//    }
+    @PostMapping("/boardDelete/{postNo}")
+    public String boardDelete(@PathVariable("postNo") int postNo,
+                              HttpServletRequest req) {
+        if(req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter())) {
+            postService.delete(postNo);
+            return "redirect:/board";
+        }
+        return "redirect:/content?id=" + postNo;
+    }
 }

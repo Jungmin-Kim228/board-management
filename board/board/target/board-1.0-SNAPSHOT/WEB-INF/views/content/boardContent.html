@@ -5,8 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<button onclick="location.href='/boardModify'">Post Modify</button>
-<button onclick="location.href='/boardDelete'">Post Delete</button>
+<form th:action="'/boardModify/' + ${post.id}" method="get">
+    <input type="submit" th:value="PostModify">
+</form>
+<form th:action="'/boardDelete/' +${post.id}" method="post">
+    <input type="submit" th:value="PostDelete">
+</form>
 <h2>[TITLE] <span th:text="${post.title}"></span></h2>
 <h4>[NICKNAME] <span th:text="${post.writer}"></span></h4>
 <span>[WriteDate]</span><span th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></span>
@@ -18,6 +22,7 @@
 <br />
 <div style="border: 1px solid;  width: 400px; height: 50px; padding: 10px;">
     <form th:action="'/commentRegister?id='+ ${post.id}" method="post">
+        <span>Create New Comment!</span>
         <input type="text" name="comment" ><br />
         <input type="submit" name="button" value="register">
     </form>

@@ -16,11 +16,6 @@
         WHERE user_no = #{num}
     </select>
 
-    <select id="selectUsers" resultType="com.nhnacademy.jdbc.board.compre.domain.User">
-        select *
-        from Users
-    </select>
-
     <select id="doLogin" resultType="com.nhnacademy.jdbc.board.compre.domain.User">
         SELECT *
         FROM Users

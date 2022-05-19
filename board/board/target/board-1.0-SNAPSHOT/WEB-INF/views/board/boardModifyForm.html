@@ -5,9 +5,9 @@
     <title>BoardModify</title>
 </head>
 <body>
-<form action="/boardModify" method="post">
-    <span th:text="Title"></span><input type="text" name="logId"><br/>
-    <span th:text="Content"></span><textarea cols = "50" rows = "10"></textarea><br/>
+<form th:action="'/boardModify/' + ${postNo}" method="post">
+    <span th:text="Title"></span><input type="text" name="modifyTitle"><br/>
+    <span th:text="Content"></span><textarea cols = "50" rows = "10" name="modifyContent"></textarea><br/>
     <input type="submit" value="Modify">
 </form>
 </body>

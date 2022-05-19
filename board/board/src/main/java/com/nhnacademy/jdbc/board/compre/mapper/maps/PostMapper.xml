@@ -23,11 +23,11 @@
     </insert>
 
     <update id="postUpdate">
-        update Posts set name='${name}'
-        where id = #{id}
+        update Posts set post_title='${title}', post_content='${content}'
+        where post_no = #{id}
     </update>
 
     <delete id="postDelete">
-        delete from Posts where id=#{id}
+        delete from Posts where post_no = #{id}
     </delete>
 </mapper>

@@ -58,8 +58,8 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public void update(int id, Post post) {
-        postMapper.postUpdate(id, post);
+    public void update(int id, String title, String content) {
+        postMapper.postUpdate(id, title, content);
     }
 
     @Override

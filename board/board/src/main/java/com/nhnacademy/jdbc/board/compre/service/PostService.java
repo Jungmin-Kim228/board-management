@@ -11,7 +11,7 @@ public interface PostService {
 
     void register(Post post, int num);
 
-    void update(int id, Post post);
+    void update(int id, String title, String content);
 
     void delete(int id);
 }
