@@ -13,6 +13,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,9 +46,9 @@ public class BoardController {
     public String boardRegister(@RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
                                 HttpServletRequest req) {
-        Optional<User> user = userService.getUser(
+        Integer user = userService.getUser(
             (String)req.getSession(false).getAttribute("id"));
-        postService.register(new Post(title, content, new Timestamp(new Date().getTime())), user.get().getUserNum());
+        postService.register(new Post(title, content, new Timestamp(new Date().getTime())), user);
         return "redirect:/board";
     }
 

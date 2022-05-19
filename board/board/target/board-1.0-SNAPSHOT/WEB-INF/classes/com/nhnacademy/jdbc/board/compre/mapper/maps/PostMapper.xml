@@ -10,23 +10,15 @@
         where id = #{id}
     </select>
 
-    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        SELECT P.post_no AS id,
-                P.post_title AS title,
-                U.user_id AS writer,
-                P.post_write_datetime AS writeDate,
-                COUNT(C.comment_no) AS commentCount
-        FROM Posts AS P
-            INNER JOIN Users AS U
-            ON P.user_no = U.user_no
-            INNER JOIN Comments AS C
-            ON P.post_no = C.post_no
-            GROUP BY P.post_no
+    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
+        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
+               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
+               FROM Posts;
     </select>
 
     <insert id="postRegister">
         INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, post_hits)
-        VALUES (#{num}, ${Post.title}, ${Post.content}, ${Post.writeDate}, 0, 0)
+        VALUES (${num}, '${Post.title}', '${Post.content}', '${Post.writeDate}', false, 0)
     </insert>
 
     <update id="postUpdate">

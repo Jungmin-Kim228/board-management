@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.compre.domain;
 
 import java.util.Date;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,14 +16,14 @@ public class Post {
     private String title;
 
     @Getter
+    private String writer;
+
+    @Getter
     @Setter
     private String content;
 
     @Getter
-    private String writer;
-
-    @Getter
-    private Date writeDate;
+    private final Date writeDate;
 
     @Getter
     @Setter
@@ -32,12 +33,12 @@ public class Post {
     @Setter
     private int commentCount;
 
-    public Post(int id, String title, String writer, Date writeDate, int commentCount) {
+    public Post(int id, String title, String writer, String content, Date writeDate, int commentCount) {
         this.id = id;
         this.title = title;
         this.writer = writer;
+        this.content = content;
         this.writeDate = writeDate;
-        this.modifyDate = null;
         this.commentCount = commentCount;
     }
 

@@ -17,11 +17,19 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(String id) {
-        if(Objects.isNull(userMapper.selectUser(id))) {
-            return Optional.empty();
+    public Integer getUser(String id) {
+        if(Objects.isNull(userMapper.selectUserNum(id))) {
+            return 0;
         }
-        return userMapper.selectUser(id);
+        return userMapper.selectUserNum(id);
+    }
+
+    @Override
+    public String getUserId(int num) {
+        if(Objects.isNull(userMapper.selectUserId(num))) {
+            return null;
+        }
+        return userMapper.selectUserId(num);
     }
 
     @Override
