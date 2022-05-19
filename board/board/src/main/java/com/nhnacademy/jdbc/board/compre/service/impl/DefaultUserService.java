@@ -30,12 +30,6 @@ public class DefaultUserService implements UserService {
         }
         return userMapper.selectUserId(num);
     }
-
-    @Override
-    public List<User> getUsers() {
-        return userMapper.selectUsers();
-    }
-
     @Override
     public boolean successLogin(String id, String password) {
         return userMapper.doLogin(id, password).isPresent();

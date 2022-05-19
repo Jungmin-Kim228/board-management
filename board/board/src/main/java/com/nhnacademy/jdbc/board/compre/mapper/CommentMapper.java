@@ -1,7 +1,6 @@
 package com.nhnacademy.jdbc.board.compre.mapper;
 
 import com.nhnacademy.jdbc.board.compre.dao.CommentDAO;
-import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;

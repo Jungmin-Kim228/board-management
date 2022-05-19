@@ -14,7 +14,5 @@ public interface UserMapper {
 
     String selectUserId(@Param("num") int num);
 
-    List<User> selectUsers();
-
     Optional<User> doLogin(@Param("id") String id, @Param("password") String password);
 }
