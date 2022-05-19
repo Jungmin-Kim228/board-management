@@ -5,11 +5,12 @@
     <title>Home</title>
 </head>
 <body>
-<h2 th:text="welcome"></h2>
+<h2 th:text="'Welcome ' + ${user}"></h2>
 
 <h3><a href="/board">Go Board</a></h3>
 
 <h3><a href="/login">login</a></h3>
+
 <h3><a href="/logout">logout</a></h3>
 </body>
 </html>
