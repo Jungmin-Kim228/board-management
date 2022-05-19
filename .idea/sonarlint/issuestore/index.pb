@@ -22,8 +22,6 @@ Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java
 j
 :board/board/src/main/webapp/WEB-INF/views/index/index.html,4\6\46988af0802e96a940c8d94b11318ca6afcc12d8
 {
-Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Post.java,e\8\e88f241fc970f7790391242665ab424c10950cae
-{
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/User.java,d\7\d7d846b0d13c08f7ea8ae29205462a8e859d1f77
 C
 board/board/pom.xml,d\d\dd18d7a34156b1a580b12fc7c876c80edae336c3

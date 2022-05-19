@@ -57,7 +57,14 @@ public class BoardController {
     }
 
     @PostMapping("/boardModify")
-    public String BoardModify() {
+    public String boardModify() {
         return "redirect:/board";
     }
+
+    // todo (not todo) added method
+//    @PostMapping("/boardDelete")
+//    public String boardDelete(@RequestParam("which") int num) {
+//        postService.delete(num);
+//        return "redirect:/board";
+//    }
 }
