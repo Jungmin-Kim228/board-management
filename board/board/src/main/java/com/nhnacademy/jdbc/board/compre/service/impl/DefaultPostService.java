@@ -1,8 +1,10 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
 import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
+import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
+import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import java.util.ArrayList;
@@ -18,10 +20,12 @@ import org.springframework.stereotype.Service;
 public class DefaultPostService implements PostService {
     private final PostMapper postMapper;
     private final UserService userService;
+    private final CommentService commentService;
 
-    public DefaultPostService(PostMapper postMapper, DefaultUserService userService) {
+    public DefaultPostService(PostMapper postMapper, DefaultUserService userService, DefaultCommentService commentService) {
         this.postMapper = postMapper;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
     @Override
@@ -40,9 +44,10 @@ public class DefaultPostService implements PostService {
         List<PostDAO> postDao = postMapper.selectPosts();
         List<Post> posts = new ArrayList<>();
         for (PostDAO postDAO : postDao) {
+            List<Comment> comment = commentService.getComments(postDAO.getPostNo());
             posts.add(new Post(postDAO.getPostNo(),
                 postDAO.getPostTitle(), (userService.getUserId(postDAO.getUserNo())),
-                postDAO.getPostContent(), postDAO.getPostWriteDatetime(), postDAO.getPostHits()
+                postDAO.getPostContent(), postDAO.getPostWriteDatetime(), comment.size()
                 ));
         }
         return posts;
