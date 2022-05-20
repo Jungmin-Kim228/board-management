@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
 import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
+import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
@@ -60,4 +61,13 @@ public class DefaultPostService implements PostService {
         postMapper.postDelete(id);
     }
 
+    @Override
+    public int getCount() {
+        return this.postMapper.postCount();
+    }
+
+    @Override
+    public List<PostDAO> getListPage(Pagination pagination) {
+        return this.postMapper.getListPage(pagination);
+    }
 }

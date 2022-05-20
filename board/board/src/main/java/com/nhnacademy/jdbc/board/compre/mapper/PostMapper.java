@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.compre.mapper;
 
 import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
+import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +27,8 @@ public interface PostMapper {
     void postUpdate(int id, Post post);
 
     void postDelete(int id);
+
+    int postCount();
+
+    List<PostDAO> getListPage(final Pagination pagination);
 }

@@ -1,5 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
+import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
+import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.domain.User;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
@@ -31,9 +33,13 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public String boardView(Model model) {
-        List<Post> posts = postService.getPosts();
+    public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
+        Pagination pagination = new Pagination(postService.getCount(), page);
+        List<PostDAO> posts = postService.getListPage(pagination) ;
+
         model.addAttribute("allPost", posts);
+        model.addAttribute("page", page);
+        model.addAttribute("pagination", pagination);
         return "board/boardView";
     }
 
@@ -62,10 +68,4 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    // todo (not todo) added method
-//    @PostMapping("/boardDelete")
-//    public String boardDelete(@RequestParam("which") int num) {
-//        postService.delete(num);
-//        return "redirect:/board";
-//    }
 }
