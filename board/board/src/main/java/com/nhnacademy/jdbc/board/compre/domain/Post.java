@@ -1,59 +1,26 @@
 package com.nhnacademy.jdbc.board.compre.domain;
 
 import java.util.Date;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Data
 public class Post {
 
-    @Getter
-    @Setter
-    private int id;
+    int postNo;
 
-    @Getter
-    @Setter
-    private String title;
+    int userNo;
 
-    @Getter
-    private String writer;
+    String postTitle;
 
-    @Getter
-    @Setter
-    private String content;
+    String postContent;
 
-    @Getter
-    private final Date writeDate;
+    Date postWriteDatetime;
 
-    @Getter
-    @Setter
-    private Date modifyDate;
+    Date postModifyDatetime;
 
-    @Getter
-    @Setter
-    private int commentCount;
+    boolean postCheckHide;
 
-    @Getter
-    @Setter
-    private boolean checkHide;
-
-    @Getter
-    @Setter
-    private boolean isLike;
-
-    public Post(int id, String title, String writer, String content, Date writeDate, int commentCount, boolean checkHide) {
-        this.id = id;
-        this.title = title;
-        this.writer = writer;
-        this.content = content;
-        this.writeDate = writeDate;
-        this.commentCount = commentCount;
-        this.checkHide = checkHide;
-        this.isLike = false;
-    }
-
-    public Post(String title, String content, Date writeDate) {
-        this.title = title;
-        this.content = content;
-        this.writeDate = writeDate;
-    }
+    int postHits;
 }

@@ -7,8 +7,6 @@ Jboard/board/src/main/java/com/nhnacademy/jdbc/board/config/RootConfig.java,f\e
 Qboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebAppInitializer.java,b\b\bb8eb342c55b32b72bc43d99045835ef180841cb
 y
 Iboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebConfig.java,3\8\38749ad4a92ad4f6d50ca6056c097a648f7961ae
-~
-Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java,0\0\00964d38634a50725882ec1f34b4d7367689a13f
 ‡
 Wboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/WebControllerAdvice.java,4\4\44601d0e07596a3d53f1fef12f03182ac60a017f
 |

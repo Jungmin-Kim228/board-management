@@ -1,17 +1,21 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor
-@Data
 public class UserDTO {
 
-    int userNo;
+    @Getter
+    @Setter
+    int userNum;
+    @Getter
+    private final String id;
 
-    String userId;
+    @Getter
+    private final String pw;
 
-    String userPw;
-
-    boolean checkAdmin;
+    public UserDTO(String id, String pw) {
+        this.id = id;
+        this.pw = pw;
+    }
 }

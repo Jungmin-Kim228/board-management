@@ -1,22 +1,17 @@
 package com.nhnacademy.jdbc.board.compre.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Data
 public class Comment {
-    @Getter
-    private final int commentNo;
 
-    @Getter
-    private final String commentWriter;
+    int commentNo;
 
-    @Getter
-    @Setter
-    private String content;
+    int postNo;
 
-    public Comment(int commentNo, String commentWriter, String content) {
-        this.commentNo = commentNo;
-        this.commentWriter = commentWriter;
-        this.content = content;
-    }
+    int userNo;
+
+    String commentContent;
 }

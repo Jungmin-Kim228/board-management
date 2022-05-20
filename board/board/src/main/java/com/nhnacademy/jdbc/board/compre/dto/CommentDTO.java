@@ -1,17 +1,22 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor
-@Data
 public class CommentDTO {
+    @Getter
+    private final int commentNo;
 
-    int commentNo;
+    @Getter
+    private final String commentWriter;
 
-    int postNo;
+    @Getter
+    @Setter
+    private String content;
 
-    int userNo;
-
-    String commentContent;
+    public CommentDTO(int commentNo, String commentWriter, String content) {
+        this.commentNo = commentNo;
+        this.commentWriter = commentWriter;
+        this.content = content;
+    }
 }

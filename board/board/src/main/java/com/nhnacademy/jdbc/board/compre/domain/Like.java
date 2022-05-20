@@ -1,11 +1,11 @@
-package com.nhnacademy.jdbc.board.compre.dto;
+package com.nhnacademy.jdbc.board.compre.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class LikeDTO {
+public class Like {
 
     int likeNo;
 

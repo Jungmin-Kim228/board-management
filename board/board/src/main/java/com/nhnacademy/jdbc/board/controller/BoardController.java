@@ -1,7 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
-import com.nhnacademy.jdbc.board.compre.domain.Post;
+import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -39,23 +39,23 @@ public class BoardController {
     @GetMapping("/board")
     public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page, HttpServletRequest req) {
         Pagination pagination = new Pagination(postService.getCount(), page);
-        List<Post> list = postService.getListPage(pagination);
-        List<Post> posts = new ArrayList<>();
+        List<PostDTO> list = postService.getListPage(pagination);
+        List<PostDTO> postDTOS = new ArrayList<>();
 
-        for (Post post : list) {
-            if(!post.isCheckHide()) {
+        for (PostDTO postDTO : list) {
+            if(!postDTO.isCheckHide()) {
                 if(Objects.isNull(req.getSession(false))) {
-                    post.setLike(false);
+                    postDTO.setLike(false);
                 } else {
-                    if (likeService.userLike(post.getId(), userService.getUser(
+                    if (likeService.userLike(postDTO.getId(), userService.getUser(
                         String.valueOf(req.getSession(false).getAttribute("id"))))) {
-                        post.setLike(true);
+                        postDTO.setLike(true);
                     }
                 }
-                posts.add(post);
+                postDTOS.add(postDTO);
             }
         }
-        model.addAttribute("allPost", posts);
+        model.addAttribute("allPost", postDTOS);
         model.addAttribute("page", page);
         model.addAttribute("pagination", pagination);
         return "board/boardView";
@@ -72,7 +72,7 @@ public class BoardController {
                                 HttpServletRequest req) {
         Integer user = userService.getUser(
             (String)req.getSession(false).getAttribute("id"));
-        postService.register(new Post(title, content, new Timestamp(new Date().getTime())), user);
+        postService.register(new PostDTO(title, content, new Timestamp(new Date().getTime())), user);
         return "redirect:/board";
     }
 
@@ -110,9 +110,9 @@ public class BoardController {
     public String recoverBoardView(HttpServletRequest req,
                                    Model model) {
         if(userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id")))) {
-            List<Post> posts = postService.getPosts();
-            posts.removeIf(post -> !post.isCheckHide());
-            model.addAttribute("recoverPost", posts);
+            List<PostDTO> postDTOS = postService.getPosts();
+            postDTOS.removeIf(post -> !post.isCheckHide());
+            model.addAttribute("recoverPost", postDTOS);
             return "board/boardRecover";
         }
         return "redirect:/board";

@@ -1,26 +1,59 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
 import java.util.Date;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor
-@Data
 public class PostDTO {
 
-    int postNo;
+    @Getter
+    @Setter
+    private int id;
 
-    int userNo;
+    @Getter
+    @Setter
+    private String title;
 
-    String postTitle;
+    @Getter
+    private String writer;
 
-    String postContent;
+    @Getter
+    @Setter
+    private String content;
 
-    Date postWriteDatetime;
+    @Getter
+    private final Date writeDate;
 
-    Date postModifyDatetime;
+    @Getter
+    @Setter
+    private Date modifyDate;
 
-    boolean postCheckHide;
+    @Getter
+    @Setter
+    private int commentCount;
 
-    int postHits;
+    @Getter
+    @Setter
+    private boolean checkHide;
+
+    @Getter
+    @Setter
+    private boolean isLike;
+
+    public PostDTO(int id, String title, String writer, String content, Date writeDate, int commentCount, boolean checkHide) {
+        this.id = id;
+        this.title = title;
+        this.writer = writer;
+        this.content = content;
+        this.writeDate = writeDate;
+        this.commentCount = commentCount;
+        this.checkHide = checkHide;
+        this.isLike = false;
+    }
+
+    public PostDTO(String title, String content, Date writeDate) {
+        this.title = title;
+        this.content = content;
+        this.writeDate = writeDate;
+    }
 }

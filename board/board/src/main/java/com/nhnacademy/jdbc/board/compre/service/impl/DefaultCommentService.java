@@ -1,7 +1,7 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
-import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.mapper.CommentMapper;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -23,7 +23,7 @@ public class DefaultCommentService implements CommentService {
     }
 
     @Override
-    public Optional<CommentDTO> getComment(int id) {
+    public Optional<Comment> getComment(int id) {
         if (Objects.isNull(commentMapper.selectComment(id))) {
             return Optional.empty();
         }
@@ -31,14 +31,14 @@ public class DefaultCommentService implements CommentService {
     }
 
     @Override
-    public List<Comment> getComments(int id) {
-        List<CommentDTO> com = commentMapper.selectComments(id);
-        List<Comment> comments = new ArrayList<>();
-        for (CommentDTO commentDTO : com) {
-            comments.add(new Comment(commentDTO.getCommentNo(),(userService.getUserId(commentDTO.getUserNo())),
-                commentDTO.getCommentContent()));
+    public List<CommentDTO> getComments(int id) {
+        List<Comment> com = commentMapper.selectComments(id);
+        List<CommentDTO> commentDTOS = new ArrayList<>();
+        for (Comment comment : com) {
+            commentDTOS.add(new CommentDTO(comment.getCommentNo(),(userService.getUserId(comment.getUserNo())),
+                comment.getCommentContent()));
         }
-        return comments;
+        return commentDTOS;
     }
 
     @Override

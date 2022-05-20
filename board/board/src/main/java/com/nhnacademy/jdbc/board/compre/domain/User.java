@@ -1,21 +1,17 @@
 package com.nhnacademy.jdbc.board.compre.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Data
 public class User {
 
-    @Getter
-    @Setter
-    int userNum;
-    @Getter
-    private final String id;
+    int userNo;
 
-    @Getter
-    private final String pw;
+    String userId;
 
-    public User(String id, String pw) {
-        this.id = id;
-        this.pw = pw;
-    }
+    String userPw;
+
+    boolean checkAdmin;
 }

@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.CommentMapper">
-    <select id="selectComment" resultType="com.nhnacademy.jdbc.board.compre.dto.CommentDTO">
+    <select id="selectComment" resultType="com.nhnacademy.jdbc.board.compre.domain.Comment">
         SELECT comment_no AS commentNo, post_no AS postNo, user_no AS userNo, comment_content AS commentContent
         FROM Comments
         WHERE comment_no = ${id}
     </select>
 
-    <select id="selectComments" resultType="com.nhnacademy.jdbc.board.compre.dto.CommentDTO">
+    <select id="selectComments" resultType="com.nhnacademy.jdbc.board.compre.domain.Comment">
         SELECT comment_no AS commentNo, post_no AS postNo, user_no AS userNo, comment_content AS commentContent
         FROM Comments
         WHERE post_no = ${id}

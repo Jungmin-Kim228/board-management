@@ -1,8 +1,8 @@
 package com.nhnacademy.jdbc.board.controller;
 
-import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
-import com.nhnacademy.jdbc.board.compre.domain.Post;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
+import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -33,10 +33,10 @@ public class ContentController {
     @GetMapping("/content")
     public String readyBoardContent(@RequestParam("id") int id,
                                     Model model) {
-        Post post = postService.getPost(id).get();
-        List<Comment> comment = commentService.getComments(id);
-        model.addAttribute("post", post);
-        model.addAttribute("comment", comment);
+        PostDTO postDTO = postService.getPost(id).get();
+        List<CommentDTO> commentDTO = commentService.getComments(id);
+        model.addAttribute("post", postDTO);
+        model.addAttribute("comment", commentDTO);
         return "content/boardContent";
     }
 
@@ -53,12 +53,12 @@ public class ContentController {
                                         @RequestParam("button") String button,
                                         HttpServletRequest req,
                                         Model model) {
-        CommentDTO com = commentService.getComment(commentNo).get();
-        Comment comment = new Comment(com.getCommentNo(),
+        Comment com = commentService.getComment(commentNo).get();
+        CommentDTO commentDTO = new CommentDTO(com.getCommentNo(),
             userService.getUserId(com.getUserNo()), com.getCommentContent());
-        if((comment.getCommentWriter().equals(req.getSession(false).getAttribute("id")))) {
+        if((commentDTO.getCommentWriter().equals(req.getSession(false).getAttribute("id")))) {
             if (button.equals("Modify")) {
-                model.addAttribute("modifyComment", comment);
+                model.addAttribute("modifyComment", commentDTO);
                 return "comment/commentModify";
             } else {
                 commentService.delete(commentNo);
@@ -72,7 +72,7 @@ public class ContentController {
     public String commentModify(@PathVariable int commentNo,
                                 @RequestParam("commentContent") String content) {
         commentService.update(commentNo, content);
-        CommentDTO com = commentService.getComment(commentNo).get();
+        Comment com = commentService.getComment(commentNo).get();
         return "redirect:/content?id=" + com.getPostNo();
     }
 

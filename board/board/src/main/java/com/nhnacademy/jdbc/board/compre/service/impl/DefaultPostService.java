@@ -1,9 +1,9 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
-import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
-import com.nhnacademy.jdbc.board.compre.domain.Comment;
-import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
+import com.nhnacademy.jdbc.board.compre.domain.Pagination;
+import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
@@ -29,33 +29,33 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public Optional<Post> getPost(int id) {
+    public Optional<PostDTO> getPost(int id) {
         if (Objects.isNull(postMapper.selectPost(id))) {
             return Optional.empty();
         }
-        PostDTO pod = postMapper.selectPost(id).get();
-        return Optional.of(new Post(pod.getPostNo(),
+        Post pod = postMapper.selectPost(id).get();
+        return Optional.of(new PostDTO(pod.getPostNo(),
             pod.getPostTitle(), (userService.getUserId(pod.getUserNo())),
             pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostHits(), pod.isPostCheckHide()));
     }
 
     @Override
-    public List<Post> getPosts() { // 지울 것
-        List<PostDTO> postDTO = postMapper.selectPosts();
-        List<Post> posts = new ArrayList<>();
-        for (PostDTO postDto : postDTO) {
-            List<Comment> comment = commentService.getComments(postDto.getPostNo());
-                posts.add(new Post(postDto.getPostNo(),
+    public List<PostDTO> getPosts() { // 지울 것
+        List<Post> postDTO = postMapper.selectPosts();
+        List<PostDTO> postDTOS = new ArrayList<>();
+        for (Post postDto : postDTO) {
+            List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
+                postDTOS.add(new PostDTO(postDto.getPostNo(),
                     postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                    postDto.getPostContent(), postDto.getPostWriteDatetime(), comment.size(),
+                    postDto.getPostContent(), postDto.getPostWriteDatetime(), commentDTO.size(),
                     postDto.isPostCheckHide()));
         }
-        return posts;
+        return postDTOS;
     }
 
     @Override
-    public void register(Post post, int num) {
-        postMapper.postRegister(post, num);
+    public void register(PostDTO postDTO, int num) {
+        postMapper.postRegister(postDTO, num);
     }
 
     @Override
@@ -79,17 +79,17 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<Post> getListPage(final Pagination pagination) {
-        List<PostDTO> postDtoList = postMapper.getListPage(pagination);
-        List<Post> posts = new ArrayList<>();
-        for (PostDTO postDto : postDtoList) {
-            List<Comment> comment = commentService.getComments(postDto.getPostNo());
-            posts.add(new Post(postDto.getPostNo(),
+    public List<PostDTO> getListPage(final Pagination pagination) {
+        List<Post> postDtoList = postMapper.getListPage(pagination);
+        List<PostDTO> postDTOS = new ArrayList<>();
+        for (Post postDto : postDtoList) {
+            List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
+            postDTOS.add(new PostDTO(postDto.getPostNo(),
                 postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
                 postDto.getPostContent(), postDto.getPostWriteDatetime(),
-                comment.size(), postDto.isPostCheckHide()
+                commentDTO.size(), postDto.isPostCheckHide()
             ));
         }
-        return posts;
+        return postDTOS;
     }
 }
