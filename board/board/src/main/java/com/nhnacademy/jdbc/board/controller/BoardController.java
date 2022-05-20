@@ -1,6 +1,5 @@
 package com.nhnacademy.jdbc.board.controller;
 
-import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
@@ -37,12 +36,11 @@ public class BoardController {
         Pagination pagination = new Pagination(postService.getCount(), page);
         List<Post> posts = postService.getListPage(pagination);
 
-        // List<Post> posts = new ArrayList<>();
-        // for (Post post:postService.getPosts()) {
-        //     if(!post.isCheckHide()) {
-        //         posts.add(post);
-        //     }
-        // }
+        for (Post post : posts) {
+            if(post.isCheckHide()) {
+                posts.remove(post.getId());
+            }
+        }
         model.addAttribute("allPost", posts);
         model.addAttribute("page", page);
         model.addAttribute("pagination", pagination);

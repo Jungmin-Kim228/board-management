@@ -39,7 +39,7 @@
         select count(*) from Posts
     </select>
 
-    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
+    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.dto.PostDTO">
         SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
                post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
         FROM Posts

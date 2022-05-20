@@ -15,6 +15,8 @@ public interface PostMapper {
 
     Optional<PostDTO> selectPost(@Param("id") int id);
 
+    List<PostDTO> selectPosts();
+
     void postRegister(@Param("Post") Post post, @Param("num") int num);
 
     void postUpdate(@Param("id") int id, @Param("title") String title, @Param("content") String content);

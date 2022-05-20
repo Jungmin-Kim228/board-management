@@ -71,20 +71,22 @@ public class DefaultPostService implements PostService {
     @Override
     public void recover(int id) {
         postMapper.postRecover(id);
-    
+    }
+
+    @Override
     public int getCount() {
         return this.postMapper.postCount();
     }
 
     @Override
-    public List<Post> getListPage(Pagination pagination) {
+    public List<Post> getListPage(final Pagination pagination) {
         List<PostDTO> postDtoList = postMapper.getListPage(pagination);
         List<Post> posts = new ArrayList<>();
         for (PostDTO postDto : postDtoList) {
             List<Comment> comment = commentService.getComments(postDto.getPostNo());
             posts.add(new Post(postDto.getPostNo(),
                 postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostHits(),
+                postDto.getPostContent(), postDto.getPostWriteDatetime(),
                 comment.size(), postDto.isPostCheckHide()
             ));
         }
