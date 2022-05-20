@@ -3,6 +3,7 @@ package com.nhnacademy.jdbc.board.compre.mapper;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,7 +20,7 @@ public interface PostMapper {
 
     void postRegister(@Param("Post") PostDTO postDTO, @Param("num") int num);
 
-    void postUpdate(@Param("id") int id, @Param("title") String title, @Param("content") String content);
+    void postUpdate(@Param("id") int id, @Param("title") String title, @Param("content") String content, @Param("date") Date date);
 
     void postDelete(@Param("id") int id);
 

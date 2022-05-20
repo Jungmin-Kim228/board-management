@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
 import java.util.Date;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,13 +41,18 @@ public class PostDTO {
     @Setter
     private boolean isLike;
 
-    public PostDTO(int id, String title, String writer, String content, Date writeDate, int commentCount, boolean checkHide) {
+    public PostDTO(int id, String title, String writer, String content, Date writeDate, Date modifyDate, int commentCount, boolean checkHide) {
         this.id = id;
         this.title = title;
         this.writer = writer;
         this.content = content;
         this.writeDate = writeDate;
         this.commentCount = commentCount;
+        if(Objects.isNull(modifyDate)) {
+            this.modifyDate = writeDate;
+        } else {
+            this.modifyDate = modifyDate;
+        }
         this.checkHide = checkHide;
         this.isLike = false;
     }

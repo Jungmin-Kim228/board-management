@@ -6,7 +6,7 @@
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.PostMapper">
     <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
         SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
+               post_write_datetime AS postWriteDatetime, post_modify_datetime AS postModifyDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
         FROM Posts
         WHERE post_no = #{id}
     </select>
@@ -23,7 +23,7 @@
     </insert>
 
     <update id="postUpdate">
-        UPDATE Posts SET post_title='${title}', post_content='${content}'
+        UPDATE Posts SET post_title='${title}', post_content='${content}', post_modify_dateTime='${date}'
         WHERE post_no = #{id}
     </update>
 

@@ -9,6 +9,7 @@ import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,7 +37,7 @@ public class DefaultPostService implements PostService {
         Post pod = postMapper.selectPost(id).get();
         return Optional.of(new PostDTO(pod.getPostNo(),
             pod.getPostTitle(), (userService.getUserId(pod.getUserNo())),
-            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostHits(), pod.isPostCheckHide()));
+            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostModifyDatetime(),pod.getPostHits(),pod.isPostCheckHide()));
     }
 
     @Override
@@ -47,7 +48,8 @@ public class DefaultPostService implements PostService {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
                 postDTOS.add(new PostDTO(postDto.getPostNo(),
                     postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                    postDto.getPostContent(), postDto.getPostWriteDatetime(), commentDTO.size(),
+                    postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                    commentDTO.size(),
                     postDto.isPostCheckHide()));
         }
         return postDTOS;
@@ -59,8 +61,8 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public void update(int id, String title, String content) {
-        postMapper.postUpdate(id, title, content);
+    public void update(int id, String title, String content, Date date) {
+        postMapper.postUpdate(id, title, content, date);
     }
 
     @Override
@@ -86,7 +88,7 @@ public class DefaultPostService implements PostService {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
             postDTOS.add(new PostDTO(postDto.getPostNo(),
                 postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                postDto.getPostContent(), postDto.getPostWriteDatetime(),
+                postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                 commentDTO.size(), postDto.isPostCheckHide()
             ));
         }

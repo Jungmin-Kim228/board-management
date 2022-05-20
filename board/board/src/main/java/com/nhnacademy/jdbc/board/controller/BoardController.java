@@ -91,7 +91,7 @@ public class BoardController {
     public String boardModify(@PathVariable("postNo") int postNo,
                               @RequestParam("modifyTitle") String title,
                               @RequestParam("modifyContent") String content) {
-        postService.update(postNo, title, content);
+        postService.update(postNo, title, content, new Timestamp(new Date().getTime()));
         return "redirect:/board";
     }
 
