@@ -94,4 +94,19 @@ public class DefaultPostService implements PostService {
         }
         return postDTOS;
     }
+
+    @Override
+    public List<PostDTO> searchPost(String title) {
+        List<Post> postDTO = postMapper.searchPost(title);
+        List<PostDTO> postDTOS = new ArrayList<>();
+        for (Post postDto : postDTO) {
+            List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
+            postDTOS.add(new PostDTO(postDto.getPostNo(),
+                postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
+                postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                commentDTO.size(),
+                postDto.isPostCheckHide()));
+        }
+        return postDTOS;
+    }
 }

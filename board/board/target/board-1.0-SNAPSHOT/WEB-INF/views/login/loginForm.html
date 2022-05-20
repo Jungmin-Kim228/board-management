@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>loginForm</title>
+</head>
+<body>
+<form action="/login" method="post">
+    <span th:text="ID"></span><input type="text" name="logId"><br/>
+    <span th:text="PW"></span><input type="password" name="logPw"><br/>
+    <input type="submit" value="login">
+</form>
+<h3><a href="/">Go Home</a></h3>
+</body>
+</html>

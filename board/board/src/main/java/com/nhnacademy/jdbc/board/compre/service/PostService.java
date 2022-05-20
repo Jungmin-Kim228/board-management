@@ -22,4 +22,6 @@ public interface PostService {
     int getCount();
 
     List<PostDTO> getListPage(final Pagination pagination);
+
+    List<PostDTO> searchPost(String title);
 }

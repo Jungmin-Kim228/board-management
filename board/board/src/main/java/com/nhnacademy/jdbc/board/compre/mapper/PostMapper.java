@@ -29,4 +29,6 @@ public interface PostMapper {
     int postCount();
 
     List<Post> getListPage(final Pagination pagination);
+
+    List<Post> searchPost(@Param("title") String title);
 }

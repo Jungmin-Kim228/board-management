@@ -36,7 +36,9 @@ public class LikeController {
         List<PostDTO> postDTOS = postService.getPosts();
         for (PostDTO postDTO : postDTOS) {
             if (likeService.userLike(postDTO.getId(), userService.getUser((String) req.getSession(false).getAttribute("id")))) {
-                list.add(postDTO);
+                if(!postDTO.isCheckHide()) {
+                    list.add(postDTO);
+                }
             }
         }
         model.addAttribute("likePost", list);
