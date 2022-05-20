@@ -35,7 +35,7 @@ public class BoardController {
     @GetMapping("/board")
     public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
         Pagination pagination = new Pagination(postService.getCount(), page);
-        List<PostDAO> posts = postService.getListPage(pagination) ;
+        List<PostDAO> posts = postService.getListPage(pagination);
 
         model.addAttribute("allPost", posts);
         model.addAttribute("page", page);

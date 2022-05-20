@@ -29,4 +29,14 @@
     <delete id="postDelete">
         delete from Posts where id=#{id}
     </delete>
+
+    <select id="postCount" resultType="int">
+        select count(*) from Posts
+    </select>
+
+    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
+        select * from Posts
+        order by post_no
+        limit #{rowCount} offset #{offset}
+    </select>
 </mapper>

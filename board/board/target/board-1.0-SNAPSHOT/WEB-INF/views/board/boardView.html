@@ -21,8 +21,24 @@
         <td th:text="${post.writeDate}"></td>
         <td th:text="${post.commentCount}"></td>
     </tr>
-
 </table>
+<div id="paginationDiv">
+    <span th:if="${pagination.startPage > 1}">
+        <a th:href="@{'/board?page=1'}" th:text="'처음 '"></a>
+    </span>
+    <span th:if="${pagination.isPrev == true}">
+        <a th:href="@{'/board?page='+${pagination.startPage - 1}}" th:text="'이전'"></a>
+    </span>
+    <span th:each="pageNum : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+        <a th:href="@{'/board?page='+${pageNum}}" th:text=" ${pageNum} "></a>
+    </span>
+    <span th:if="${pagination.isNext == true}">
+        <a th:href="@{'board?page='+${pagination.endPage + 1}" th:text="'다음'"></a>
+    </span>
+    <span th:if="${pagination.endPage < pagination.totalPageCount}">
+        <a th:href="@{'/board?page='+${pagination.totalPageCount}}" th:text=" 끝"></a>
+    </span>
+</div>
 <button onclick="location.href='/boardRegister'">Post Register</button>
 <h3><a href="/">Go Home</a></h3>
 </body>
