@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.Post;
+import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
@@ -9,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,18 +25,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BoardController {
     private final PostService postService;
     private final UserService userService;
+    private final LikeService likeService;
 
 
-    public BoardController(DefaultPostService postService, DefaultUserService userService) {
+    public BoardController(DefaultPostService postService, DefaultUserService userService,
+                           LikeService likeService) {
         this.postService = postService;
         this.userService = userService;
+        this.likeService = likeService;
     }
 
     @GetMapping("/board")
-    public String boardView(Model model) {
+    public String boardView(Model model, HttpServletRequest req) {
         List<Post> posts = new ArrayList<>();
         for (Post post:postService.getPosts()) {
             if(!post.isCheckHide()) {
+                if(Objects.isNull(req.getSession(false))) {
+                    post.setLike(false);
+                } else {
+                    if (likeService.userLike(post.getId(), userService.getUser(
+                        String.valueOf(req.getSession(false).getAttribute("id"))))) {
+                        post.setLike(true);
+                    }
+                }
                 posts.add(post);
             }
         }

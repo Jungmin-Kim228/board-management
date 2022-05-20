@@ -36,6 +36,10 @@ public class Post {
     @Setter
     private boolean checkHide;
 
+    @Getter
+    @Setter
+    private boolean isLike;
+
     public Post(int id, String title, String writer, String content, Date writeDate, int commentCount, boolean checkHide) {
         this.id = id;
         this.title = title;
@@ -44,6 +48,7 @@ public class Post {
         this.writeDate = writeDate;
         this.commentCount = commentCount;
         this.checkHide = checkHide;
+        this.isLike = false;
     }
 
     public Post(String title, String content, Date writeDate) {

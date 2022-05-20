@@ -8,6 +8,7 @@
 <h2 align="center">Board VIEW</h2>
 <table border="1" align="center">
     <tr>
+        <th>Like</th>
         <th>No</th>
         <th>Title</th>
         <th>Writer</th>
@@ -15,6 +16,12 @@
         <th>CommentCount</th>
     </tr>
     <tr align="center" th:each="post : ${allPost}">
+        <form th:action="'/like/' + ${post.id}" method="post">
+            <td>
+                <span th:if="${post.isLike}"><input type="submit" name="button" value="unlike"></span>
+                <span th:unless="${post.isLike}"><input type="submit" name="button" value="like"></span>
+            </td>
+        </form>
         <td th:text="${post.id}"></td>
         <td><a th:href="@{/content(id=${post.id})}" th:text="${post.title}"></a></td>
         <td th:text="${post.writer}"></td>
@@ -24,6 +31,7 @@
 </table>
 <button onclick="location.href='/boardRegister'">Post Register</button>
 <button onclick="location.href='/boardRecover'">Post Recover</button>
+<button onclick="location.href='/boardLikes'">My Likes</button>
 <h3><a href="/">Go Home</a></h3>
 </body>
 </html>
