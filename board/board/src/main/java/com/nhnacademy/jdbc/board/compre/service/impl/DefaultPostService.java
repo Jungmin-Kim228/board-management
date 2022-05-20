@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.board.compre.service.impl;
 
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
+import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
@@ -39,7 +40,7 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<Post> getPosts() {
+    public List<Post> getPosts() { // 지울 것
         List<PostDTO> postDTO = postMapper.selectPosts();
         List<Post> posts = new ArrayList<>();
         for (PostDTO postDto : postDTO) {
@@ -70,5 +71,23 @@ public class DefaultPostService implements PostService {
     @Override
     public void recover(int id) {
         postMapper.postRecover(id);
+    
+    public int getCount() {
+        return this.postMapper.postCount();
+    }
+
+    @Override
+    public List<Post> getListPage(Pagination pagination) {
+        List<PostDTO> postDtoList = postMapper.getListPage(pagination);
+        List<Post> posts = new ArrayList<>();
+        for (PostDTO postDto : postDtoList) {
+            List<Comment> comment = commentService.getComments(postDto.getPostNo());
+            posts.add(new Post(postDto.getPostNo(),
+                postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
+                postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostHits(),
+                comment.size(), postDto.isPostCheckHide()
+            ));
+        }
+        return posts;
     }
 }

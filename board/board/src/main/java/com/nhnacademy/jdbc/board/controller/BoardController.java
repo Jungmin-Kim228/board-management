@@ -1,5 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
+import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
+import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -31,14 +33,19 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public String boardView(Model model) {
-        List<Post> posts = new ArrayList<>();
-        for (Post post:postService.getPosts()) {
-            if(!post.isCheckHide()) {
-                posts.add(post);
-            }
-        }
+    public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
+        Pagination pagination = new Pagination(postService.getCount(), page);
+        List<Post> posts = postService.getListPage(pagination);
+
+        // List<Post> posts = new ArrayList<>();
+        // for (Post post:postService.getPosts()) {
+        //     if(!post.isCheckHide()) {
+        //         posts.add(post);
+        //     }
+        // }
         model.addAttribute("allPost", posts);
+        model.addAttribute("page", page);
+        model.addAttribute("pagination", pagination);
         return "board/boardView";
     }
 
