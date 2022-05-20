@@ -56,8 +56,7 @@ public class ContentController {
         CommentDTO com = commentService.getComment(commentNo).get();
         Comment comment = new Comment(com.getCommentNo(),
             userService.getUserId(com.getUserNo()), com.getCommentContent());
-        if((comment.getCommentWriter().equals(req.getSession(false).getAttribute("id"))) ||
-            (userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id"))))) {
+        if((comment.getCommentWriter().equals(req.getSession(false).getAttribute("id")))) {
             if (button.equals("Modify")) {
                 model.addAttribute("modifyComment", comment);
                 return "comment/commentModify";

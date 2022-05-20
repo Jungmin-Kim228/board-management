@@ -12,8 +12,6 @@ Iboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebConfig.java,3\8\
 j
 :board/board/src/main/webapp/WEB-INF/views/index/index.html,4\6\46988af0802e96a940c8d94b11318ca6afcc12d8
 ~
-Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dao/CommentDAO.java,c\5\c5ebd2b438afb3f64f1f4e8eaa31f452907fde6a
-~
 Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java,0\0\00964d38634a50725882ec1f34b4d7367689a13f
 ’
 bboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/impl/DefaultCommentService.java,1\2\12f306f5f00450863b35aef2112dd3a677f50047

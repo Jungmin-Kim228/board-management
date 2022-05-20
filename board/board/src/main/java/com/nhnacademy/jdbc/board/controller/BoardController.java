@@ -79,7 +79,8 @@ public class BoardController {
     @PostMapping("/boardDelete/{postNo}")
     public String boardDelete(@PathVariable("postNo") int postNo,
                               HttpServletRequest req) {
-        if(req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter())) {
+        if((req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter()))
+        || (userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id"))))){
             postService.delete(postNo);
             return "redirect:/board";
         }
