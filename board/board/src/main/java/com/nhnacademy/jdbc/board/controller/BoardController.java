@@ -9,6 +9,7 @@ import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class BoardController {
     @GetMapping("/board")
     public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
         Pagination pagination = new Pagination(postService.getCount(), page);
-        List<PostDAO> posts = postService.getListPage(pagination);
+        List<Post> posts = postService.getListPage(pagination);
 
         model.addAttribute("allPost", posts);
         model.addAttribute("page", page);

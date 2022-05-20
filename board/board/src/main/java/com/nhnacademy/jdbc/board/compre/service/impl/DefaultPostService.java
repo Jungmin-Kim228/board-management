@@ -67,7 +67,15 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<PostDAO> getListPage(Pagination pagination) {
-        return this.postMapper.getListPage(pagination);
+    public List<Post> getListPage(Pagination pagination) {
+        List<PostDAO> postDao = postMapper.getListPage(pagination);
+        List<Post> posts = new ArrayList<>();
+        for (PostDAO postDAO : postDao) {
+            posts.add(new Post(postDAO.getPostNo(),
+                postDAO.getPostTitle(), (userService.getUserId(postDAO.getUserNo())),
+                postDAO.getPostContent(), postDAO.getPostWriteDatetime(), postDAO.getPostHits()
+            ));
+        }
+        return posts;
     }
 }

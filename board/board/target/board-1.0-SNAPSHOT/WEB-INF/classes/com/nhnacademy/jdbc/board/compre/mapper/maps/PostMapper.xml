@@ -34,8 +34,10 @@
         select count(*) from Posts
     </select>
 
-    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        select * from Posts
+    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
+        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
+               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
+        FROM Posts
         order by post_no
         limit #{rowCount} offset #{offset}
     </select>

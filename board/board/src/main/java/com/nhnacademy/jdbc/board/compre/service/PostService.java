@@ -20,5 +20,5 @@ public interface PostService {
 
     int getCount();
 
-    List<PostDAO> getListPage(final Pagination pagination);
+    List<Post> getListPage(final Pagination pagination);
 }
