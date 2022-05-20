@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Pagination {
     final int rowCount = 2; //한 페이지당 게시글 개수
-    final int pageCount = 3; // 한 블럭당 페이지 개수
+    final int pageCount = 2; // 한 블럭당 페이지 개수
 
     int totalCount; // 총 게시글 개수
     int currentPage; // 현재 페이지

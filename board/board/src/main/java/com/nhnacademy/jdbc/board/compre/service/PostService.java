@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface PostService {
     Optional<Post> getPost(int id);
 
-    List<Post> getPosts();
-
     void register(Post post, int num);
 
     void update(int id, Post post);

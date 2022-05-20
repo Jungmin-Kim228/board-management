@@ -10,12 +10,6 @@
         where id = #{id}
     </select>
 
-    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
-        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-               FROM Posts;
-    </select>
-
     <insert id="postRegister">
         INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, post_hits)
         VALUES (${num}, '${Post.title}', '${Post.content}', '${Post.writeDate}', false, 0)

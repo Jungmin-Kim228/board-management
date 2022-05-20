@@ -34,19 +34,6 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<Post> getPosts() {
-        List<PostDAO> postDao = postMapper.selectPosts();
-        List<Post> posts = new ArrayList<>();
-        for (PostDAO postDAO : postDao) {
-            posts.add(new Post(postDAO.getPostNo(),
-                postDAO.getPostTitle(), (userService.getUserId(postDAO.getUserNo())),
-                postDAO.getPostContent(), postDAO.getPostWriteDatetime(), postDAO.getPostHits()
-                ));
-        }
-        return posts;
-    }
-
-    @Override
     public void register(Post post, int num) {
         postMapper.postRegister(post, num);
     }

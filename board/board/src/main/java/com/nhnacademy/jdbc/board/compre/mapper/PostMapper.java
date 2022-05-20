@@ -20,8 +20,6 @@ public interface PostMapper {
 
     Optional<Post> selectPost(int id);
 
-    List<PostDAO> selectPosts();
-
     void postRegister(@Param("Post") Post post, @Param("num") int num);
 
     void postUpdate(int id, Post post);
