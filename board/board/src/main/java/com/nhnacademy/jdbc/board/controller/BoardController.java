@@ -36,11 +36,8 @@ public class BoardController {
         Pagination pagination = new Pagination(postService.getCount(), page);
         List<Post> posts = postService.getListPage(pagination);
 
-        for (Post post : posts) {
-            if(post.isCheckHide()) {
-                posts.remove(post.getId());
-            }
-        }
+        posts.removeIf(Post::isCheckHide);
+
         model.addAttribute("allPost", posts);
         model.addAttribute("page", page);
         model.addAttribute("pagination", pagination);
@@ -96,12 +93,8 @@ public class BoardController {
     public String recoverBoardView(HttpServletRequest req,
                                    Model model) {
         if(userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id")))) {
-            List<Post> posts = new ArrayList<>();
-            for (Post post:postService.getPosts()) {
-                if(post.isCheckHide()) {
-                    posts.add(post);
-                }
-            }
+            List<Post> posts = postService.getPosts();
+            posts.removeIf(post -> !post.isCheckHide());
             model.addAttribute("recoverPost", posts);
             return "board/boardRecover";
         }
