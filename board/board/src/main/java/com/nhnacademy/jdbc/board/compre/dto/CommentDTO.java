@@ -1,11 +1,11 @@
-package com.nhnacademy.jdbc.board.compre.dao;
+package com.nhnacademy.jdbc.board.compre.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class CommentDAO {
+public class CommentDTO {
 
     int commentNo;
 

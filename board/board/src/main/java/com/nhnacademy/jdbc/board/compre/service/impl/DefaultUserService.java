@@ -35,4 +35,11 @@ public class DefaultUserService implements UserService {
         return userMapper.doLogin(id, password).isPresent();
     }
 
+    @Override
+    public boolean checkAdmin(int id) {
+        if(Objects.isNull(userMapper.findUser(id))) {
+            return false;
+        }
+        return userMapper.findUser(id).get().isCheckAdmin();
+    }
 }

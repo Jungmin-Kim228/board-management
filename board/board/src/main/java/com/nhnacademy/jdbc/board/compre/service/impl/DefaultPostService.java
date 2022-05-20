@@ -1,6 +1,6 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
-import com.nhnacademy.jdbc.board.compre.dao.PostDAO;
+import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
@@ -32,22 +32,22 @@ public class DefaultPostService implements PostService {
         if (Objects.isNull(postMapper.selectPost(id))) {
             return Optional.empty();
         }
-        PostDAO pod = postMapper.selectPost(id).get();
+        PostDTO pod = postMapper.selectPost(id).get();
         return Optional.of(new Post(pod.getPostNo(),
             pod.getPostTitle(), (userService.getUserId(pod.getUserNo())),
-            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostHits()));
+            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostHits(), pod.isPostCheckHide()));
     }
 
     @Override
     public List<Post> getPosts() {
-        List<PostDAO> postDao = postMapper.selectPosts();
+        List<PostDTO> postDTO = postMapper.selectPosts();
         List<Post> posts = new ArrayList<>();
-        for (PostDAO postDAO : postDao) {
-            List<Comment> comment = commentService.getComments(postDAO.getPostNo());
-            posts.add(new Post(postDAO.getPostNo(),
-                postDAO.getPostTitle(), (userService.getUserId(postDAO.getUserNo())),
-                postDAO.getPostContent(), postDAO.getPostWriteDatetime(), comment.size()
-                ));
+        for (PostDTO postDto : postDTO) {
+            List<Comment> comment = commentService.getComments(postDto.getPostNo());
+                posts.add(new Post(postDto.getPostNo(),
+                    postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
+                    postDto.getPostContent(), postDto.getPostWriteDatetime(), comment.size(),
+                    postDto.isPostCheckHide()));
         }
         return posts;
     }
@@ -67,4 +67,8 @@ public class DefaultPostService implements PostService {
         postMapper.postDelete(id);
     }
 
+    @Override
+    public void recover(int id) {
+        postMapper.postRecover(id);
+    }
 }

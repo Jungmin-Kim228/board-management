@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.PostMapper">
-    <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
-        select post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
+    <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.dto.PostDTO">
+        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
                post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-        from Posts
-        where post_no = #{id}
+        FROM Posts
+        WHERE post_no = #{id}
     </select>
 
-    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.dao.PostDAO">
+    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.dto.PostDTO">
         SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
                post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
                FROM Posts;
@@ -23,11 +23,15 @@
     </insert>
 
     <update id="postUpdate">
-        update Posts set post_title='${title}', post_content='${content}'
-        where post_no = #{id}
+        UPDATE Posts SET post_title='${title}', post_content='${content}'
+        WHERE post_no = #{id}
     </update>
 
-    <delete id="postDelete">
-        delete from Posts where post_no = #{id}
-    </delete>
+    <update id="postDelete">
+        UPDATE Posts SET post_check_hide=1 WHERE post_no = #{id}
+    </update>
+
+    <update id="postRecover">
+        UPDATE Posts SET post_check_hide=0 WHERE post_no = #{id}
+    </update>
 </mapper>

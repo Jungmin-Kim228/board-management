@@ -14,4 +14,6 @@ public interface PostService {
     void update(int id, String title, String content);
 
     void delete(int id);
+
+    void recover(int id);
 }

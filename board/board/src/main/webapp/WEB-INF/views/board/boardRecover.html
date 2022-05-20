@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recover Board</title>
+</head>
+<body>
+<h2 align="center">Board Recover</h2>
+<table border="1" align="center">
+    <tr>
+        <th>No</th>
+        <th>Title</th>
+        <th>Writer</th>
+        <th>WriteDate</th>
+        <th>CommentCount</th>
+        <th>Recover</th>
+    </tr>
+    <tr align="center" th:each="post : ${recoverPost}">
+        <td th:text="${post.id}"></td>
+        <td><a th:href="@{/content(id=${post.id})}" th:text="${post.title}"></a></td>
+        <td th:text="${post.writer}"></td>
+        <td th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${post.commentCount}"></td>
+        <form th:action="'/boardRecover/' + ${post.id}" method="post">
+            <td>
+                <input type="submit" value="recover">
+            </td>
+        </form>
+    </tr>
+</table>
+<h3><a href="/">Go Home</a></h3>
+</body>
+</html>

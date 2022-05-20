@@ -1,6 +1,6 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
-import com.nhnacademy.jdbc.board.compre.dao.CommentDAO;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import com.nhnacademy.jdbc.board.compre.mapper.CommentMapper;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
@@ -23,7 +23,7 @@ public class DefaultCommentService implements CommentService {
     }
 
     @Override
-    public Optional<CommentDAO> getComment(int id) {
+    public Optional<CommentDTO> getComment(int id) {
         if (Objects.isNull(commentMapper.selectComment(id))) {
             return Optional.empty();
         }
@@ -32,11 +32,11 @@ public class DefaultCommentService implements CommentService {
 
     @Override
     public List<Comment> getComments(int id) {
-        List<CommentDAO> com = commentMapper.selectComments(id);
+        List<CommentDTO> com = commentMapper.selectComments(id);
         List<Comment> comments = new ArrayList<>();
-        for (CommentDAO commentDAO : com) {
-            comments.add(new Comment(commentDAO.getCommentNo(),(userService.getUserId(commentDAO.getUserNo())),
-                commentDAO.getCommentContent()));
+        for (CommentDTO commentDTO : com) {
+            comments.add(new Comment(commentDTO.getCommentNo(),(userService.getUserId(commentDTO.getUserNo())),
+                commentDTO.getCommentContent()));
         }
         return comments;
     }

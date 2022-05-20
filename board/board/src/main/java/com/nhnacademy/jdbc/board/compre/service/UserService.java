@@ -7,4 +7,6 @@ public interface UserService {
     String getUserId(int num);
 
     boolean successLogin(String id, String password);
+
+    boolean checkAdmin(int id);
 }

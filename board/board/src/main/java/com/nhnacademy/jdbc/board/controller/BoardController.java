@@ -1,13 +1,12 @@
 package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.Post;
-import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
-import com.nhnacademy.jdbc.board.compre.service.impl.DefaultCommentService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,12 @@ public class BoardController {
 
     @GetMapping("/board")
     public String boardView(Model model) {
-        List<Post> posts = postService.getPosts();
+        List<Post> posts = new ArrayList<>();
+        for (Post post:postService.getPosts()) {
+            if(!post.isCheckHide()) {
+                posts.add(post);
+            }
+        }
         model.addAttribute("allPost", posts);
         return "board/boardView";
     }
@@ -80,5 +84,27 @@ public class BoardController {
             return "redirect:/board";
         }
         return "redirect:/content?id=" + postNo;
+    }
+
+    @GetMapping("/boardRecover")
+    public String recoverBoardView(HttpServletRequest req,
+                                   Model model) {
+        if(userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id")))) {
+            List<Post> posts = new ArrayList<>();
+            for (Post post:postService.getPosts()) {
+                if(post.isCheckHide()) {
+                    posts.add(post);
+                }
+            }
+            model.addAttribute("recoverPost", posts);
+            return "board/boardRecover";
+        }
+        return "redirect:/board";
+    }
+
+    @PostMapping("/boardRecover/{postNo}")
+    public String boardRecover(@PathVariable("postNo") int id) {
+        postService.recover(id);
+        return "redirect:/boardRecover";
     }
 }

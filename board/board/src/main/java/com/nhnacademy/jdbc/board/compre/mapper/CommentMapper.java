@@ -1,6 +1,6 @@
 package com.nhnacademy.jdbc.board.compre.mapper;
 
-import com.nhnacademy.jdbc.board.compre.dao.CommentDAO;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Mapper
 public interface CommentMapper {
 
-    Optional<CommentDAO> selectComment(@Param("id") int id);
+    Optional<CommentDTO> selectComment(@Param("id") int id);
 
-    List<CommentDAO> selectComments(@Param("id") int id);
+    List<CommentDTO> selectComments(@Param("id") int id);
 
     void commentRegister(@Param("postNo") int postNo, @Param("userNo") int userNo, @Param("comment") String comment);
 

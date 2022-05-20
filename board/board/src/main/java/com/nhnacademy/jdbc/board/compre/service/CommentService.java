@@ -1,12 +1,12 @@
 package com.nhnacademy.jdbc.board.compre.service;
 
-import com.nhnacademy.jdbc.board.compre.dao.CommentDAO;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import java.util.List;
 import java.util.Optional;
 
 public interface CommentService {
-    Optional<CommentDAO> getComment(int id);
+    Optional<CommentDTO> getComment(int id);
 
     List<Comment> getComments(int id);
 

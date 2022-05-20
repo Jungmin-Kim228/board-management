@@ -21,4 +21,10 @@
         FROM Users
         WHERE user_id = #{id} AND user_pw = #{password}
     </select>
+
+    <select id="findUser" resultType="com.nhnacademy.jdbc.board.compre.dto.UserDTO">
+        SELECT user_no AS userNo, user_id AS userId, user_pw AS userPw, check_admin AS checkAdmin
+        FROM Users
+        WHERE user_no = #{id}
+    </select>
 </mapper>

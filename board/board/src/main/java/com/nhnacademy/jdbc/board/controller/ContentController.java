@@ -1,6 +1,6 @@
 package com.nhnacademy.jdbc.board.controller;
 
-import com.nhnacademy.jdbc.board.compre.dao.CommentDAO;
+import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
@@ -53,7 +53,7 @@ public class ContentController {
                                         @RequestParam("button") String button,
                                         HttpServletRequest req,
                                         Model model) {
-        CommentDAO com = commentService.getComment(commentNo).get();
+        CommentDTO com = commentService.getComment(commentNo).get();
         Comment comment = new Comment(com.getCommentNo(),
             userService.getUserId(com.getUserNo()), com.getCommentContent());
         if(comment.getCommentWriter().equals(req.getSession(false).getAttribute("id"))) {
@@ -72,7 +72,7 @@ public class ContentController {
     public String commentModify(@PathVariable int commentNo,
                                 @RequestParam("commentContent") String content) {
         commentService.update(commentNo, content);
-        CommentDAO com = commentService.getComment(commentNo).get();
+        CommentDTO com = commentService.getComment(commentNo).get();
         return "redirect:/content?id=" + com.getPostNo();
     }
 

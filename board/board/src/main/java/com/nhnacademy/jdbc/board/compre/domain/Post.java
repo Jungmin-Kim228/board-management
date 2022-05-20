@@ -32,13 +32,18 @@ public class Post {
     @Setter
     private int commentCount;
 
-    public Post(int id, String title, String writer, String content, Date writeDate, int commentCount) {
+    @Getter
+    @Setter
+    private boolean checkHide;
+
+    public Post(int id, String title, String writer, String content, Date writeDate, int commentCount, boolean checkHide) {
         this.id = id;
         this.title = title;
         this.writer = writer;
         this.content = content;
         this.writeDate = writeDate;
         this.commentCount = commentCount;
+        this.checkHide = checkHide;
     }
 
     public Post(String title, String content, Date writeDate) {

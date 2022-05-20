@@ -1,4 +1,4 @@
-package com.nhnacademy.jdbc.board.compre.dao;
+package com.nhnacademy.jdbc.board.compre.dto;
 
 import java.util.Date;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class PostDAO {
+public class PostDTO {
 
     int postNo;
 
