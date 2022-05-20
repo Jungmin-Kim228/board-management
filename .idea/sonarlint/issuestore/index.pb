@@ -25,7 +25,5 @@ Wboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/WebControllerAdv
 Lboard/board/src/test/java/com/nhnacademy/jdbc/board/LoginControllerTest.java,0\5\054a4ecd6627d5ead448f02da8f4a7139652a72e
 |
 Lboard/board/src/test/java/com/nhnacademy/jdbc/board/IndexControllerTest.java,e\b\eb58e4e48250da9786189aedbd87cbd7cf7320f2
-…
-Uboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/ContentController.java,0\d\0d29b000657c3830febed8498207d9702b9ada5a
 ƒ
 Sboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/LoginController.java,6\4\64de1c0c2a2ca86f50ec934439ef3f8d42225acb
