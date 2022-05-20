@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.domain.Post;
+import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,20 +26,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BoardController {
     private final PostService postService;
     private final UserService userService;
+    private final LikeService likeService;
 
 
-    public BoardController(DefaultPostService postService, DefaultUserService userService) {
+    public BoardController(DefaultPostService postService, DefaultUserService userService,
+                           LikeService likeService) {
         this.postService = postService;
         this.userService = userService;
+        this.likeService = likeService;
     }
 
     @GetMapping("/board")
-    public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
+    public String boardView(Model model, @RequestParam(value = "page", defaultValue = "1") final int page, HttpServletRequest req) {
         Pagination pagination = new Pagination(postService.getCount(), page);
-        List<Post> posts = postService.getListPage(pagination);
+        List<Post> list = postService.getListPage(pagination);
+        List<Post> posts = new ArrayList<>();
 
-        posts.removeIf(Post::isCheckHide);
-
+        for (Post post : list) {
+            if(!post.isCheckHide()) {
+                if(Objects.isNull(req.getSession(false))) {
+                    post.setLike(false);
+                } else {
+                    if (likeService.userLike(post.getId(), userService.getUser(
+                        String.valueOf(req.getSession(false).getAttribute("id"))))) {
+                        post.setLike(true);
+                    }
+                }
+                posts.add(post);
+            }
+        }
         model.addAttribute("allPost", posts);
         model.addAttribute("page", page);
         model.addAttribute("pagination", pagination);
