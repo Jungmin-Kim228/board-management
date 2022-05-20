@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.compre.service.impl;
 
 import com.nhnacademy.jdbc.board.compre.domain.Post;
+import com.nhnacademy.jdbc.board.compre.domain.PostMainView;
 import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
@@ -82,13 +83,13 @@ public class DefaultPostService implements PostService {
 
     @Override
     public List<PostDTO> getListPage(final Pagination pagination) {
-        List<Post> postDtoList = postMapper.getListPage(pagination);
+        List<PostMainView> postDtoList = postMapper.getListPage(pagination);
         List<PostDTO> postDTOS = new ArrayList<>();
-        for (Post postDto : postDtoList) {
+        for (PostMainView postDto : postDtoList) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
             postDTOS.add(new PostDTO(postDto.getPostNo(),
-                postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                postDto.getPostTitle(), postDto.getUserId(),
+                "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                 commentDTO.size(), postDto.isPostCheckHide()
             ));
         }

@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.board.compre.mapper;
 
 import com.nhnacademy.jdbc.board.compre.domain.Post;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
+import com.nhnacademy.jdbc.board.compre.domain.PostMainView;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ public interface PostMapper {
 
     int postCount();
 
-    List<Post> getListPage(final Pagination pagination);
+    List<PostMainView> getListPage(final Pagination pagination);
 
     List<Post> searchPost(@Param("title") String title);
 }
