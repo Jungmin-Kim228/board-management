@@ -22,7 +22,6 @@ public class LoginController {
     @GetMapping("/login")
     public String loginCheck(HttpServletRequest req,
                              Model model) {
-        HttpSession session = req.getSession(false);
         if (Objects.nonNull(req.getSession(false))) {
             String user = (String) req.getSession(false).getAttribute("id");
             model.addAttribute("user", user);
