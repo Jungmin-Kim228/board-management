@@ -47,8 +47,8 @@ public class BoardController {
                 if(Objects.isNull(req.getSession(false))) {
                     postDTO.setLike(false);
                 } else {
-                    if (likeService.userLike(postDTO.getId(), userService.getUser(
-                        String.valueOf(req.getSession(false).getAttribute("id"))))) {
+                    if (likeService.userLike(postDTO.getId(),
+                        String.valueOf(req.getSession(false).getAttribute("id")))) {
                         postDTO.setLike(true);
                     }
                 }

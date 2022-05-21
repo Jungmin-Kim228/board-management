@@ -2,7 +2,6 @@ package com.nhnacademy.jdbc.board.compre.service.impl;
 
 import com.nhnacademy.jdbc.board.compre.mapper.LikeMapper;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
-import java.util.Objects;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,7 @@ public class DefaultLikeService implements LikeService {
     }
 
     @Override
-    public boolean userLike(int postId, int userId) {
+    public boolean userLike(int postId, String userId) {
         return (likeMapper.userLike(postId, userId)).isPresent();
     }
 

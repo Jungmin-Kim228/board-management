@@ -5,9 +5,12 @@
 
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.LikeMapper">
     <select id="userLike" resultType="com.nhnacademy.jdbc.board.compre.domain.Like">
-        SELECT like_no AS likeNo, post_no AS postNo, user_no AS userNo
-        FROM Likes
-        WHERE post_no = #{postNo} AND user_no = #{userNo}
+        SELECT A.like_no AS likeNo, A.post_no AS postNo, C.user_id AS userId
+        FROM Likes A
+        INNER JOIN Users C
+            ON A.user_no = C.user_no
+            AND C.user_id = #{userId}
+        WHERE post_no = #{postNo}
     </select>
 
     <insert id="likeInsert">

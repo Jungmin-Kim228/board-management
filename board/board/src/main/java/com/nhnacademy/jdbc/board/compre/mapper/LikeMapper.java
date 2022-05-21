@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Mapper
 public interface LikeMapper {
-    Optional<Like> userLike(@Param("postNo") int postNo, @Param("userNo") int userNo);
+    Optional<Like> userLike(@Param("postNo") int postNo, @Param("userId") String userId);
 
     void likeInsert(@Param("postNo") int postNo, @Param("userNo") int userNo);
 

@@ -11,5 +11,5 @@ public class Like {
 
     int postNo;
 
-    int userNo;
+    String userId;
 }
