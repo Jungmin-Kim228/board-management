@@ -37,7 +37,7 @@ public class BoardController {
 
 
     public BoardController(DefaultPostService postService, DefaultUserService userService,
-                           LikeService likeService, FileService fileService) {
+                           LikeService likeService) {
         this.postService = postService;
         this.userService = userService;
         this.likeService = likeService;
@@ -50,8 +50,8 @@ public class BoardController {
         List<PostDTO> postDTOS = new ArrayList<>();
 
         for (PostDTO postDTO : list) {
-            if(!postDTO.isCheckHide()) {
-                if(Objects.isNull(req.getSession(false))) {
+            if (!postDTO.isCheckHide()) {
+                if (Objects.isNull(req.getSession(false))) {
                     postDTO.setLike(false);
                 } else {
                     if (likeService.userLike(postDTO.getId(),
@@ -115,7 +115,7 @@ public class BoardController {
     @PostMapping("/boardDelete/{postNo}")
     public String boardDelete(@PathVariable("postNo") int postNo,
                               HttpServletRequest req) {
-        if((req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter()))
+        if ((req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter()))
         || (userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id"))))){
             postService.delete(postNo);
             return "redirect:/board";
