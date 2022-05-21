@@ -43,6 +43,6 @@ public class MybatisConfig {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
+        return new DataSourceTransactionManager(logDataSource());
     }
 }

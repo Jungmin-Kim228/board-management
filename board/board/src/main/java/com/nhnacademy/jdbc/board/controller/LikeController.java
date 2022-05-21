@@ -35,7 +35,8 @@ public class LikeController {
         List<ViewPostDTO> list = new ArrayList<>();
         List<ViewPostDTO> postDTOS = postService.getPosts();
         for (ViewPostDTO postDTO : postDTOS) {
-            if (likeService.userLike(postDTO.getId(), (String) req.getSession(false).getAttribute("id"))) {
+            if (likeService.userLike(postDTO.getId(),
+                (String) req.getSession(false).getAttribute("id"))) {
                 if(!postDTO.isCheckHide()) {
                     list.add(postDTO);
                 }
