@@ -23,4 +23,8 @@ public class Post {
     boolean postCheckHide;
 
     int postHits;
+
+    String filename;
+
+    byte[] file;
 }

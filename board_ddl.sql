@@ -24,6 +24,8 @@ create table Posts (
     post_modify_datetime datetime null,
     post_check_hide boolean not null,
     post_hits int not null,
+    file_name varchar(20) not null,
+    file_data blob not null,
     primary key(post_no)
 );
 
@@ -39,13 +41,6 @@ create table Comments (
     user_no int not null,
     comment_content varchar(50) not null,
     primary key(comment_no)
-);
-
-create table Files (
-	file_no int not null auto_increment,
-    post_no int not null,
-    file_name varchar(20) not null,
-    primary key(file_no)
 );
 
 create table Likes (

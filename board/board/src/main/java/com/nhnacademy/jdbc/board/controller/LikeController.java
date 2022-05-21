@@ -1,6 +1,5 @@
 package com.nhnacademy.jdbc.board.controller;
 
-import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;

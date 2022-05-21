@@ -13,6 +13,7 @@
 </form>
 <h2>[TITLE] <span th:text="${post.title}"></span></h2>
 <h4>[NICKNAME] <span th:text="${post.writer}"></span></h4>
+<h5>[File] <a th:href="'/fileupload/' + ${post.id}" th:text="${post.filename}"></a></h5>
 <span>[WriteDate]</span><span th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></span>
 <span>[ModifyDate]</span><span th:text="${#dates.format(post.modifyDate,'yyyy-MM-dd HH:mm:ss')}"></span>
 <br />

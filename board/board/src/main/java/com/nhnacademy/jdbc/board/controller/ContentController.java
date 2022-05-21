@@ -4,6 +4,7 @@ import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
+import com.nhnacademy.jdbc.board.compre.service.FileService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultCommentService;
@@ -23,11 +24,14 @@ public class ContentController {
     private final UserService userService;
     private final CommentService commentService;
     private final PostService postService;
+    private final FileService fileService;
 
-    public ContentController(DefaultCommentService commentService, DefaultUserService userService, DefaultPostService postService) {
+    public ContentController(DefaultCommentService commentService, DefaultUserService userService, DefaultPostService postService,
+                             FileService fileService) {
         this.commentService = commentService;
         this.userService = userService;
         this.postService = postService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/content")

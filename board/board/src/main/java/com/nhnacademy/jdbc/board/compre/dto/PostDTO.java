@@ -1,47 +1,41 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
+@Data
 public class PostDTO {
 
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
     private String title;
 
-    @Getter
     private String writer;
 
-    @Getter
-    @Setter
     private String content;
 
-    @Getter
     private final Date writeDate;
 
-    @Getter
-    @Setter
     private Date modifyDate;
 
-    @Getter
-    @Setter
     private int commentCount;
 
-    @Getter
-    @Setter
     private boolean checkHide;
 
-    @Getter
-    @Setter
     private boolean isLike;
 
-    public PostDTO(int id, String title, String writer, String content, Date writeDate, Date modifyDate, int commentCount, boolean checkHide) {
+    private byte[] file;
+
+    private String filename;
+
+    public PostDTO(int id, String title, String writer,
+                   String content, Date writeDate, Date modifyDate,
+                   int commentCount, boolean checkHide) {
         this.id = id;
         this.title = title;
         this.writer = writer;
@@ -55,6 +49,34 @@ public class PostDTO {
         }
         this.checkHide = checkHide;
         this.isLike = false;
+    }
+
+    public PostDTO(int id, String title, String writer,
+                   String content, Date writeDate, Date modifyDate,
+                   int commentCount, boolean checkHide, String filename, byte[] file) {
+        this.id = id;
+        this.title = title;
+        this.writer = writer;
+        this.content = content;
+        this.writeDate = writeDate;
+        this.commentCount = commentCount;
+        if(Objects.isNull(modifyDate)) {
+            this.modifyDate = writeDate;
+        } else {
+            this.modifyDate = modifyDate;
+        }
+        this.checkHide = checkHide;
+        this.isLike = false;
+        this.filename = filename;
+        this.file = file;
+    }
+
+    public PostDTO(String title, String content, Date writeDate, byte[] file, String filename) {
+        this.title = title;
+        this.content = content;
+        this.writeDate = writeDate;
+        this.file = file;
+        this.filename = filename;
     }
 
     public PostDTO(String title, String content, Date writeDate) {

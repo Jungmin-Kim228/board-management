@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.FileMapper">
+    <insert id="fileDownload">
+        INSERT INTO Files(post_no, user_no)
+        VALUES (${postNo}, ${userNo})
+    </insert>
+
+    <select id="uploadFile" resultType="com.nhnacademy.jdbc.board.compre.domain.FileData">
+        SELECT file_name AS fileName, file_data AS fileByte
+        FROM Posts
+        WHERE post_no = #{postNo}
+    </select>
+
+    <select id="userLike" resultType="com.nhnacademy.jdbc.board.compre.domain.Like">
+        SELECT A.like_no AS likeNo, A.post_no AS postNo, C.user_id AS userId
+        FROM Likes A
+                 INNER JOIN Users C
+                            ON A.user_no = C.user_no
+                                AND C.user_id = #{userId}
+        WHERE post_no = #{postNo}
+    </select>
+</mapper>

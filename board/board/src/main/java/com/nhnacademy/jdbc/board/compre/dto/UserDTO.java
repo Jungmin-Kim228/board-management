@@ -1,17 +1,16 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 public class UserDTO {
 
-    @Getter
-    @Setter
     int userNum;
-    @Getter
+
     private final String id;
 
-    @Getter
     private final String pw;
 
     public UserDTO(String id, String pw) {

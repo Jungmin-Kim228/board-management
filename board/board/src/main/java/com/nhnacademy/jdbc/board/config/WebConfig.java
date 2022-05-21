@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.config;
 
 import com.nhnacademy.jdbc.board.interceptor.LoginCheckInterceptor;
+import java.io.IOException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -10,7 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -50,7 +54,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
     }
 
     @Bean
-    public ViewResolver thymeleafViewResolver(){
+    public ViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
         thymeleafViewResolver.setCharacterEncoding("UTF-8");
@@ -58,14 +62,14 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
         return thymeleafViewResolver;
     }
 
-    public SpringTemplateEngine templateEngine(){
+    public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setTemplateEngineMessageSource(messageSource);
         return templateEngine;
     }
 
-    public SpringResourceTemplateResolver templateResolver(){
+    public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setCharacterEncoding("UTF-8");
@@ -76,10 +80,19 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware, Mes
     }
 
     @Bean
-    RequestMappingHandlerAdapter requestMappingHandlerAdapter(){
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
         RequestMappingHandlerAdapter requestMappingHandlerAdapter = new RequestMappingHandlerAdapter();
         requestMappingHandlerAdapter.setIgnoreDefaultModelOnRedirect(true);
         return requestMappingHandlerAdapter;
     }
 
+    @Bean
+    public CommonsMultipartResolver multipartResolver() throws IOException {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setDefaultEncoding("UTF-8");
+        commonsMultipartResolver.setMaxUploadSize(10240000);
+        commonsMultipartResolver.setMaxInMemorySize(2048000);
+        commonsMultipartResolver.setUploadTempDir(new FileSystemResource("C:"));
+        return commonsMultipartResolver;
+    }
 }

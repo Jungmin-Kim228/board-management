@@ -2,38 +2,27 @@ package com.nhnacademy.jdbc.board.compre.dto;
 
 import java.util.Date;
 import java.util.Objects;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 public class ViewPostDTO {
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
     private String title;
 
-    @Getter
     private String writer;
 
-    @Getter
     private final Date writeDate;
 
-    @Getter
-    @Setter
     private Date modifyDate;
 
-    @Getter
-    @Setter
+    
     private int commentCount;
 
-    @Getter
-    @Setter
     private boolean checkHide;
 
-    @Getter
-    @Setter
     private boolean isLike;
 
     public ViewPostDTO(int id, String title, String writer, Date writeDate, Date modifyDate, int commentCount, boolean checkHide) {

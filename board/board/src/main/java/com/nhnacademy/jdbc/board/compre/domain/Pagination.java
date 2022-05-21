@@ -14,7 +14,6 @@ public class Pagination {
     int endPage;
 
     int totalPageCount; // 총 페이지 개수
-
     boolean isPrev = false;
     boolean isNext = false;
 

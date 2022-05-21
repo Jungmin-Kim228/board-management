@@ -3,15 +3,19 @@ package com.nhnacademy.jdbc.board.controller;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
+import com.nhnacademy.jdbc.board.compre.service.FileService;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Slf4j
 @Controller
@@ -31,7 +37,7 @@ public class BoardController {
 
 
     public BoardController(DefaultPostService postService, DefaultUserService userService,
-                           LikeService likeService) {
+                           LikeService likeService, FileService fileService) {
         this.postService = postService;
         this.userService = userService;
         this.likeService = likeService;
@@ -70,10 +76,20 @@ public class BoardController {
     @PostMapping("/boardRegister")
     public String boardRegister(@RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
-                                HttpServletRequest req) {
-        Integer user = userService.getUser(
-            (String)req.getSession(false).getAttribute("id"));
-        postService.register(new PostDTO(title, content, new Timestamp(new Date().getTime())), user);
+                                @RequestParam("file") MultipartFile file,
+                                MultipartHttpServletRequest req) throws IOException {
+        if (Objects.nonNull(file)) {
+            String filename = file.getOriginalFilename().split("\\\\")[file.getOriginalFilename().split("\\\\").length-1];
+            Integer user = userService.getUser(
+                (String) req.getSession(false).getAttribute("id"));
+            postService.register(new PostDTO(title, content,
+                new Timestamp(new Date().getTime()), file.getBytes(), filename), user);
+        } else {
+            Integer user = userService.getUser(
+                (String) req.getSession(false).getAttribute("id"));
+            postService.register(new PostDTO(title, content,
+                new Timestamp(new Date().getTime())), user);
+        }
         return "redirect:/board";
     }
 

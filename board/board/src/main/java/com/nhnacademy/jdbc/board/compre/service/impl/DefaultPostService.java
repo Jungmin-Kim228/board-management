@@ -39,8 +39,11 @@ public class DefaultPostService implements PostService {
         Post pod = postMapper.selectPost(id).get();
         return Optional.of(new PostDTO(pod.getPostNo(),
             pod.getPostTitle(), (userService.getUserId(pod.getUserNo())),
-            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostModifyDatetime(),pod.getPostHits(),pod.isPostCheckHide()));
+            pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostModifyDatetime()
+            ,pod.getPostHits(),pod.isPostCheckHide(),pod.getFilename(), pod.getFile()));
     }
+
+
 
     @Override
     public List<ViewPostDTO> getPosts() { // 지울 것
