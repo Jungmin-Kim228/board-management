@@ -24,10 +24,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 public class ContentControllerTest {
-    private MockMvc mockMvc;
     private DefaultPostService postService;
     private DefaultCommentService commentService;
     private DefaultUserService userService;
+    private MockMvc mockMvc;
 
     @BeforeEach
     void setUp() {
