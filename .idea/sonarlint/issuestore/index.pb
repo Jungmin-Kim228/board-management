@@ -7,8 +7,6 @@ Jboard/board/src/main/java/com/nhnacademy/jdbc/board/config/RootConfig.java,f\e
 Qboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebAppInitializer.java,b\b\bb8eb342c55b32b72bc43d99045835ef180841cb
 y
 Iboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebConfig.java,3\8\38749ad4a92ad4f6d50ca6056c097a648f7961ae
-|
-Lboard/board/src/test/java/com/nhnacademy/jdbc/board/IndexControllerTest.java,e\b\eb58e4e48250da9786189aedbd87cbd7cf7320f2
 j
 :board/board/src/main/webapp/WEB-INF/views/index/index.html,4\6\46988af0802e96a940c8d94b11318ca6afcc12d8
 „
