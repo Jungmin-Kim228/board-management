@@ -1,3 +1,6 @@
+com\nhnacademy\jdbc\board\BoardControllerTest.class
 com\nhnacademy\jdbc\board\ContentControllerTest.class
+com\nhnacademy\jdbc\board\LikeControllerTest.class
 com\nhnacademy\jdbc\board\LoginControllerTest.class
 com\nhnacademy\jdbc\board\IndexControllerTest.class
+com\nhnacademy\jdbc\board\SearchControllerTest.class

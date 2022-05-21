@@ -3,7 +3,6 @@ package com.nhnacademy.jdbc.board.controller;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
-import com.nhnacademy.jdbc.board.compre.service.FileService;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -11,13 +10,14 @@ import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import java.io.IOException;
 import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +37,7 @@ public class BoardController {
 
 
     public BoardController(DefaultPostService postService, DefaultUserService userService,
-                           LikeService likeService, FileService fileService) {
+                           LikeService likeService) {
         this.postService = postService;
         this.userService = userService;
         this.likeService = likeService;
@@ -51,14 +51,8 @@ public class BoardController {
 
         for (PostDTO postDTO : list) {
             if(!postDTO.isCheckHide()) {
-                if(Objects.isNull(req.getSession(false))) {
-                    postDTO.setLike(false);
-                } else {
-                    if (likeService.userLike(postDTO.getId(),
-                        String.valueOf(req.getSession(false).getAttribute("id")))) {
-                        postDTO.setLike(true);
-                    }
-                }
+                Optional<HttpSession> session = Optional.ofNullable(req.getSession(false));
+                checkUserLiked(session, postDTO);
                 postDTOS.add(postDTO);
             }
         }
@@ -66,6 +60,17 @@ public class BoardController {
         model.addAttribute("page", page);
         model.addAttribute("pagination", pagination);
         return "board/boardView";
+    }
+
+    private void checkUserLiked(Optional<HttpSession> session, PostDTO dto) {
+        session.ifPresent(httpSession -> {
+            Object userId = httpSession.getAttribute("id");
+            if(Objects.nonNull(userId)){
+                dto.setLike(likeService.userLike(dto.getId(), userId.toString()));
+                return;
+            }
+            dto.setLike(false);
+        });
     }
 
     @GetMapping("/boardRegister")
