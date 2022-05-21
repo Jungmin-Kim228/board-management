@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SearchView</title>
+</head>
+<body>
+<table border="1" align="center">
+    <tr>
+        <th>Like</th>
+        <th>No</th>
+        <th>Title</th>
+        <th>Writer</th>
+        <th>WriteDate</th>
+        <th>CommentCount</th>
+    </tr>
+    <tr align="center" th:each="post : ${searchPosts}">
+        <form th:action="'/like/' + ${post.id}" method="post">
+            <td>
+                <span th:if="${post.isLike}"><input type="submit" name="button" value="unlike"></span>
+                <span th:unless="${post.isLike}"><input type="submit" name="button" value="like"></span>
+            </td>
+        </form>
+        <td th:text="${post.id}"></td>
+        <td><a th:href="@{/content(id=${post.id})}" th:text="${post.title}"></a></td>
+        <td th:text="${post.writer}"></td>
+        <td th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${post.commentCount}"></td>
+    </tr>
+</table>
+<h3><a href="/board">Go Board</a></h3>
+</body>
+</html>

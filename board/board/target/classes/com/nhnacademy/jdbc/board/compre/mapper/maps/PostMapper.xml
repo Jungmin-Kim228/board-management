@@ -6,24 +6,26 @@
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.PostMapper">
     <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
         SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
+               post_write_datetime AS postWriteDatetime, post_modify_datetime AS postModifyDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
         FROM Posts
         WHERE post_no = #{id}
     </select>
 
-    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-               FROM Posts;
+    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        FROM Posts AS A
+                 INNER JOIN Users AS B
+                            ON A.user_no = B.user_no
+        order by post_no
     </select>
 
     <insert id="postRegister">
         INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, post_hits)
-        VALUES (${num}, '${Post.title}', '${Post.content}', '${Post.writeDate}', false, 0)
+        VALUES (${num}, #{Post.title}, #{Post.content}, #{Post.writeDate} , false, 0)
     </insert>
 
     <update id="postUpdate">
-        UPDATE Posts SET post_title='${title}', post_content='${content}'
+        UPDATE Posts SET post_title='${title}', post_content='${content}', post_modify_dateTime='${date}'
         WHERE post_no = #{id}
     </update>
 
@@ -39,11 +41,21 @@
         select count(*) from Posts
     </select>
 
-    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-        FROM Posts
+    <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        FROM Posts AS A
+        INNER JOIN Users AS B
+            ON A.user_no = B.user_no
         order by post_no
         limit #{rowCount} offset #{offset}
+    </select>
+
+    <select id="searchPost" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        FROM Posts AS A
+                 INNER JOIN Users AS B
+                            ON A.user_no = B.user_no
+        WHERE post_title LIKE concat('%', #{title}, '%')
+        order by post_no;
     </select>
 </mapper>

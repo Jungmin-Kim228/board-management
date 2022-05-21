@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -47,8 +48,8 @@ public class BoardController {
                 if(Objects.isNull(req.getSession(false))) {
                     postDTO.setLike(false);
                 } else {
-                    if (likeService.userLike(postDTO.getId(), userService.getUser(
-                        String.valueOf(req.getSession(false).getAttribute("id"))))) {
+                    if (likeService.userLike(postDTO.getId(),
+                        String.valueOf(req.getSession(false).getAttribute("id")))) {
                         postDTO.setLike(true);
                     }
                 }
@@ -91,7 +92,7 @@ public class BoardController {
     public String boardModify(@PathVariable("postNo") int postNo,
                               @RequestParam("modifyTitle") String title,
                               @RequestParam("modifyContent") String content) {
-        postService.update(postNo, title, content);
+        postService.update(postNo, title, content, new Timestamp(new Date().getTime()));
         return "redirect:/board";
     }
 
@@ -110,7 +111,7 @@ public class BoardController {
     public String recoverBoardView(HttpServletRequest req,
                                    Model model) {
         if(userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id")))) {
-            List<PostDTO> postDTOS = postService.getPosts();
+            List<ViewPostDTO> postDTOS = postService.getPosts();
             postDTOS.removeIf(post -> !post.isCheckHide());
             model.addAttribute("recoverPost", postDTOS);
             return "board/boardRecover";
