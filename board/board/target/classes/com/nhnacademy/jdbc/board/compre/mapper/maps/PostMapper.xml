@@ -22,7 +22,7 @@
 
     <insert id="postRegister">
         INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, post_hits, file_name, file_data)
-        VALUES (${num}, #{Post.title}, #{Post.content}, #{Post.writeDate} , false, 0, #{Post.filename}, #{Post.file})
+        VALUES (#{num}, #{Post.title}, #{Post.content}, #{Post.writeDate} , false, 0, #{Post.filename}, #{Post.file})
     </insert>
 
     <update id="postUpdate">

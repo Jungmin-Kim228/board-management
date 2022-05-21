@@ -17,13 +17,13 @@ import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultCommentService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import com.nhnacademy.jdbc.board.controller.ContentController;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.Answer;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -33,6 +33,7 @@ public class ContentControllerTest {
     private DefaultPostService postService;
     private DefaultCommentService commentService;
     private DefaultUserService userService;
+    private DefaultViewService viewService;
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -40,8 +41,9 @@ public class ContentControllerTest {
         postService = mock(DefaultPostService.class);
         commentService = mock(DefaultCommentService.class);
         userService = mock(DefaultUserService.class);
+        viewService = mock(DefaultViewService.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
-            new ContentController(commentService, userService, postService)).build();
+            new ContentController(commentService, userService, postService, viewService)).build();
     }
 
     @Test

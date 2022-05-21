@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.ViewMapper">
+    <select id="findViewer" resultType="com.nhnacademy.jdbc.board.compre.domain.View">
+        SELECT A.post_no AS postNo, user_id AS userId
+        FROM Views A
+        INNER JOIN Users B
+            ON A.user_no = B.user_no
+        WHERE A.post_no = #{postNo}
+    </select>
+
+    <select id="isView" resultType="com.nhnacademy.jdbc.board.compre.domain.View">
+        SELECT A.post_no AS postNo, user_id AS userId
+        FROM Views A
+                 INNER JOIN Users B
+                            ON A.user_no = B.user_no
+                            AND B.user_id = #{userId}
+        WHERE A.post_no = #{postNo}
+    </select>
+
+    <insert id="insertView">
+        INSERT INTO Views(post_no, user_no)
+        VALUES (#{postNo},#{userNo})
+    </insert>
+</mapper>

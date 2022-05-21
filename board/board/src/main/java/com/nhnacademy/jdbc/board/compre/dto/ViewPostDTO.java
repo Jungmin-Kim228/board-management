@@ -18,7 +18,8 @@ public class ViewPostDTO {
 
     private Date modifyDate;
 
-    
+    private int viewCount;
+
     private int commentCount;
 
     private boolean checkHide;

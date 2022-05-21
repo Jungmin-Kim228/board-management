@@ -3,8 +3,10 @@ package com.nhnacademy.jdbc.board.controller;
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
+import com.nhnacademy.jdbc.board.compre.service.ViewService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,9 +21,13 @@ public class SearchController {
     private final PostService postService;
     private final LikeService likeService;
 
-    public SearchController(DefaultPostService postService, DefaultLikeService likeService) {
+    private final ViewService viewService;
+
+    public SearchController(DefaultPostService postService, DefaultLikeService likeService,
+                            DefaultViewService viewService) {
         this.postService = postService;
         this.likeService = likeService;
+        this.viewService = viewService;
     }
 
     @PostMapping("/searchBoard")
@@ -40,6 +46,7 @@ public class SearchController {
                         postDTO.setLike(true);
                     }
                 }
+                postDTO.setViewCount(viewService.findView(postDTO.getId()).size());
                 postDTOS.add(postDTO);
             }
         }

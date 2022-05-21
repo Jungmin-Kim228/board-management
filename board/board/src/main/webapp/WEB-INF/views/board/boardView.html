@@ -20,6 +20,7 @@
         <th>Title</th>
         <th>Writer</th>
         <th>WriteDate</th>
+        <th>ViewCount</th>
         <th>CommentCount</th>
     </tr>
     <tr align="center" th:each="post : ${allPost}">
@@ -33,6 +34,7 @@
         <td><a th:href="@{/content(id=${post.id})}" th:text="${post.title}"></a></td>
         <td th:text="${post.writer}"></td>
         <td th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${post.viewCount}"></td>
         <td th:text="${post.commentCount}"></td>
     </tr>
 </table>

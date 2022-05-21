@@ -15,10 +15,10 @@
 
     <insert id="likeInsert">
         INSERT INTO Likes(post_no, user_no)
-        VALUES (${postNo}, ${userNo})
+        VALUES (#{postNo}, #{userNo})
     </insert>
 
     <delete id="likeDelete">
-        DELETE FROM Likes WHERE post_no=${postNo} AND user_no=${userNo}
+        DELETE FROM Likes WHERE post_no=#{postNo} AND user_no=#{userNo}
     </delete>
 </mapper>

@@ -6,8 +6,11 @@ import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
+import com.nhnacademy.jdbc.board.compre.service.ViewService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import java.io.IOException;
 import java.sql.Timestamp;
 
@@ -35,12 +38,15 @@ public class BoardController {
     private final UserService userService;
     private final LikeService likeService;
 
+    private final ViewService viewService;
+
 
     public BoardController(DefaultPostService postService, DefaultUserService userService,
-                           LikeService likeService) {
+                           DefaultLikeService likeService, DefaultViewService viewService) {
         this.postService = postService;
         this.userService = userService;
         this.likeService = likeService;
+        this.viewService = viewService;
     }
 
     @GetMapping("/board")
@@ -53,6 +59,7 @@ public class BoardController {
             if(!postDTO.isCheckHide()) {
                 Optional<HttpSession> session = Optional.ofNullable(req.getSession(false));
                 checkUserLiked(session, postDTO);
+                postDTO.setViewCount(viewService.findView(postDTO.getId()).size());
                 postDTOS.add(postDTO);
             }
         }

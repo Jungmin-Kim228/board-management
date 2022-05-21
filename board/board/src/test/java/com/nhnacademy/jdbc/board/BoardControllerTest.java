@@ -7,17 +7,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import com.nhnacademy.jdbc.board.controller.BoardController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 public class BoardControllerTest {
     private DefaultPostService postService;
     private DefaultUserService userService;
     private DefaultLikeService likeService;
+    private DefaultViewService viewService;
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -25,7 +26,8 @@ public class BoardControllerTest {
         postService = mock(DefaultPostService.class);
         userService = mock(DefaultUserService.class);
         likeService = mock(DefaultLikeService.class);
-        mockMvc = MockMvcBuilders.standaloneSetup(new BoardController(postService, userService, likeService)).build();
+        viewService = mock(DefaultViewService.class);
+        mockMvc = MockMvcBuilders.standaloneSetup(new BoardController(postService, userService, likeService, viewService)).build();
     }
 
     @Test

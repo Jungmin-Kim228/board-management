@@ -13,9 +13,5 @@ Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java
 Zboard/board/src/main/java/com/nhnacademy/jdbc/board/interceptor/LoginCheckInterceptor.java,1\0\10658738ca9b7f0ce80fafc7c13062832959a90f
 Å
 Qboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/mapper/UserMapper.java,4\e\4e44c5f884de1547f766db70eb114f721f375213
-{
-Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/User.java,d\7\d7d846b0d13c08f7ea8ae29205462a8e859d1f77
 è
 _board/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/impl/DefaultUserService.java,d\e\de26fa90f348bda012b216a7c16f9b0c09f31c6c
-l
-<board/board/src/main/webapp/WEB-INF/views/like/likeView.html,6\6\662d5ae2403a431ac70d927aaf081df96ff5337d

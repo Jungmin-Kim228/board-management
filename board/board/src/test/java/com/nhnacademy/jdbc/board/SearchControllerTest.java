@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import com.nhnacademy.jdbc.board.controller.SearchController;
 import java.util.Date;
 import java.util.List;
@@ -24,14 +26,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class SearchControllerTest {
     private DefaultPostService postService;
     private DefaultLikeService likeService;
+    private DefaultViewService viewService;
     private MockMvc mockMvc;
 
     @BeforeEach
     void setUp() {
         postService = mock(DefaultPostService.class);
         likeService = mock(DefaultLikeService.class);
+        viewService = mock(DefaultViewService.class);
+
         mockMvc =
-            MockMvcBuilders.standaloneSetup(new SearchController(postService, likeService)).build();
+            MockMvcBuilders.standaloneSetup(new SearchController(postService, likeService,
+                viewService)).build();
     }
 
     @Test

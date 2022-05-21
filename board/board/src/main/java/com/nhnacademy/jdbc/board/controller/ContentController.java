@@ -4,22 +4,23 @@ import com.nhnacademy.jdbc.board.compre.domain.Comment;
 import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
-import com.nhnacademy.jdbc.board.compre.service.FileService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
+import com.nhnacademy.jdbc.board.compre.service.ViewService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultCommentService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
-import java.util.Date;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import java.util.List;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -29,15 +30,23 @@ public class ContentController {
     private final CommentService commentService;
     private final PostService postService;
 
-    public ContentController(DefaultCommentService commentService, DefaultUserService userService, DefaultPostService postService) {
+    private final ViewService viewService;
+
+    public ContentController(DefaultCommentService commentService, DefaultUserService userService, DefaultPostService postService,
+                             DefaultViewService viewService) {
         this.commentService = commentService;
         this.userService = userService;
         this.postService = postService;
+        this.viewService = viewService;
     }
 
     @GetMapping("/content")
     public String readyBoardContent(@RequestParam("id") int id,
+                                    HttpServletRequest req,
                                     Model model) {
+        if(Objects.nonNull(req.getSession(false)) &&!viewService.isView(id, String.valueOf(req.getSession(false).getAttribute("id")))) {
+            viewService.insertView(id, userService.getUser(String.valueOf(req.getSession(false).getAttribute("id"))));
+        }
         PostDTO postDTO = postService.getPost(id).get();
         List<CommentDTO> commentDTO = commentService.getComments(id);
         model.addAttribute("post", postDTO);

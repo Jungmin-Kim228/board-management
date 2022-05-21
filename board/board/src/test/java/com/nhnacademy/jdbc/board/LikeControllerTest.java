@@ -15,6 +15,7 @@ import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import com.nhnacademy.jdbc.board.controller.LikeController;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,7 @@ public class LikeControllerTest {
     private DefaultLikeService likeService;
     private DefaultPostService postService;
     private DefaultUserService userService;
+    private DefaultViewService viewService;
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -36,8 +38,9 @@ public class LikeControllerTest {
         likeService = mock(DefaultLikeService.class);
         postService = mock(DefaultPostService.class);
         userService = mock(DefaultUserService.class);
+        viewService = mock(DefaultViewService.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
-            new LikeController(likeService, postService, userService)).build();
+            new LikeController(likeService, postService, userService, viewService)).build();
     }
 
     @Test

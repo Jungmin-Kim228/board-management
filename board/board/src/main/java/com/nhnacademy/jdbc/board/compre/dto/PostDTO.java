@@ -29,6 +29,8 @@ public class PostDTO {
 
     private boolean isLike;
 
+    private int viewCount;
+
     private byte[] file;
 
     private String filename;
