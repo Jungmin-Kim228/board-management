@@ -5,6 +5,7 @@ import com.nhnacademy.jdbc.board.compre.domain.PostMainView;
 import com.nhnacademy.jdbc.board.compre.dto.CommentDTO;
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.mapper.PostMapper;
 import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
@@ -42,14 +43,14 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<PostDTO> getPosts() { // 지울 것
-        List<Post> postDTO = postMapper.selectPosts();
-        List<PostDTO> postDTOS = new ArrayList<>();
-        for (Post postDto : postDTO) {
+    public List<ViewPostDTO> getPosts() { // 지울 것
+        List<PostMainView> postDTO = postMapper.selectPosts();
+        List<ViewPostDTO> postDTOS = new ArrayList<>();
+        for (PostMainView postDto : postDTO) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
-                postDTOS.add(new PostDTO(postDto.getPostNo(),
-                    postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                    postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                postDTOS.add(new ViewPostDTO(postDto.getPostNo(),
+                    postDto.getPostTitle(), postDto.getUserId()
+                    , postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                     commentDTO.size(),
                     postDto.isPostCheckHide()));
         }
@@ -97,14 +98,14 @@ public class DefaultPostService implements PostService {
     }
 
     @Override
-    public List<PostDTO> searchPost(String title) {
-        List<Post> postDTO = postMapper.searchPost(title);
-        List<PostDTO> postDTOS = new ArrayList<>();
-        for (Post postDto : postDTO) {
+    public List<ViewPostDTO> searchPost(String title) {
+        List<PostMainView> postDTO = postMapper.searchPost(title);
+        List<ViewPostDTO> postDTOS = new ArrayList<>();
+        for (PostMainView postDto : postDTO) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
-            postDTOS.add(new PostDTO(postDto.getPostNo(),
-                postDto.getPostTitle(), (userService.getUserId(postDto.getUserNo())),
-                postDto.getPostContent(), postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+            postDTOS.add(new ViewPostDTO(postDto.getPostNo(),
+                postDto.getPostTitle(), postDto.getUserId(),
+                postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                 commentDTO.size(),
                 postDto.isPostCheckHide()));
         }

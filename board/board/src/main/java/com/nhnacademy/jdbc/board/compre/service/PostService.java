@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.board.compre.service;
 
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,7 @@ import java.util.Optional;
 public interface PostService {
     Optional<PostDTO> getPost(int id);
 
-    List<PostDTO> getPosts();
+    List<ViewPostDTO> getPosts();
 
     void register(PostDTO postDTO, int num);
 
@@ -23,5 +24,5 @@ public interface PostService {
 
     List<PostDTO> getListPage(final Pagination pagination);
 
-    List<PostDTO> searchPost(String title);
+    List<ViewPostDTO> searchPost(String title);
 }

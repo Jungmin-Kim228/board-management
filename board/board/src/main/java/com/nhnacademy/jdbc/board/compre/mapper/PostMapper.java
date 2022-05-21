@@ -17,7 +17,7 @@ public interface PostMapper {
 
     Optional<Post> selectPost(@Param("id") int id);
 
-    List<Post> selectPosts();
+    List<PostMainView> selectPosts();
 
     void postRegister(@Param("Post") PostDTO postDTO, @Param("num") int num);
 
@@ -31,5 +31,5 @@ public interface PostMapper {
 
     List<PostMainView> getListPage(final Pagination pagination);
 
-    List<Post> searchPost(@Param("title") String title);
+    List<PostMainView> searchPost(@Param("title") String title);
 }

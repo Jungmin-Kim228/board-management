@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -33,9 +34,9 @@ public class SearchController {
     public String searchBoard(@RequestParam("searchTitle") String title,
                               HttpServletRequest req,
                               Model model) {
-        List<PostDTO> list = postService.searchPost(title);
-        List<PostDTO> postDTOS = new ArrayList<>();
-        for (PostDTO postDTO : list) {
+        List<ViewPostDTO> list = postService.searchPost(title);
+        List<ViewPostDTO> postDTOS = new ArrayList<>();
+        for (ViewPostDTO postDTO : list) {
             if(!postDTO.isCheckHide()) {
                 if(Objects.isNull(req.getSession(false))) {
                     postDTO.setLike(false);

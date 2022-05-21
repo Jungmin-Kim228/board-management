@@ -11,10 +11,12 @@
         WHERE post_no = #{id}
     </select>
 
-    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        SELECT post_no AS postNo, user_id AS userId, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-               FROM Posts;
+    <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        FROM Posts AS A
+                 INNER JOIN Users AS B
+                            ON A.user_no = B.user_no
+        order by post_no
     </select>
 
     <insert id="postRegister">
@@ -48,10 +50,12 @@
         limit #{rowCount} offset #{offset}
     </select>
 
-    <select id="searchPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
-        SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_modify_datetime AS postModifyDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-        FROM Posts
-        WHERE post_title LIKE concat('%', #{title}, '%');
+    <select id="searchPost" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        FROM Posts AS A
+                 INNER JOIN Users AS B
+                            ON A.user_no = B.user_no
+        WHERE post_title LIKE concat('%', #{title}, '%')
+        order by post_no;
     </select>
 </mapper>

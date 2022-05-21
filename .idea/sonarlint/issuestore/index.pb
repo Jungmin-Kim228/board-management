@@ -29,7 +29,5 @@ Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/CommentDTO.java
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/UserDTO.java,e\5\e5c3b23c8c0b4eb7c67f5cf2e6f2ea231ce4ebf5
 è
 _board/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/impl/DefaultUserService.java,d\e\de26fa90f348bda012b216a7c16f9b0c09f31c6c
-{
-Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/PostDTO.java,6\e\6e4da9ccedbde218f77e28581c488a01dd3ce0ce
 l
 <board/board/src/main/webapp/WEB-INF/views/like/likeView.html,6\6\662d5ae2403a431ac70d927aaf081df96ff5337d

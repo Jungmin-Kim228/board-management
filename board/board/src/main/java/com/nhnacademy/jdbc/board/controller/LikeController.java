@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -32,9 +33,9 @@ public class LikeController {
     @GetMapping("/boardLikes")
     public String likesView(HttpServletRequest req,
                             Model model) {
-        List<PostDTO> list = new ArrayList<>();
-        List<PostDTO> postDTOS = postService.getPosts();
-        for (PostDTO postDTO : postDTOS) {
+        List<ViewPostDTO> list = new ArrayList<>();
+        List<ViewPostDTO> postDTOS = postService.getPosts();
+        for (ViewPostDTO postDTO : postDTOS) {
             if (likeService.userLike(postDTO.getId(), (String) req.getSession(false).getAttribute("id"))) {
                 if(!postDTO.isCheckHide()) {
                     list.add(postDTO);

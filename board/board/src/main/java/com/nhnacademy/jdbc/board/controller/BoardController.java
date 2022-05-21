@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.Pagination;
 import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
+import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
@@ -110,7 +111,7 @@ public class BoardController {
     public String recoverBoardView(HttpServletRequest req,
                                    Model model) {
         if(userService.checkAdmin(userService.getUser((String)req.getSession(false).getAttribute("id")))) {
-            List<PostDTO> postDTOS = postService.getPosts();
+            List<ViewPostDTO> postDTOS = postService.getPosts();
             postDTOS.removeIf(post -> !post.isCheckHide());
             model.addAttribute("recoverPost", postDTOS);
             return "board/boardRecover";
