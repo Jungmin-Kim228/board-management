@@ -11,16 +11,12 @@ j
 :board/board/src/main/webapp/WEB-INF/views/index/index.html,4\6\46988af0802e96a940c8d94b11318ca6afcc12d8
 Ñ
 Tboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/mapper/CommentMapper.java,e\a\eae6b5e55e294df60e6d6cb57e24c4689b11ca38
-~
-Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java,0\0\00964d38634a50725882ec1f34b4d7367689a13f
 ä
 Zboard/board/src/main/java/com/nhnacademy/jdbc/board/interceptor/LoginCheckInterceptor.java,1\0\10658738ca9b7f0ce80fafc7c13062832959a90f
 Å
 Qboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/mapper/UserMapper.java,4\e\4e44c5f884de1547f766db70eb114f721f375213
 {
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/User.java,d\7\d7d846b0d13c08f7ea8ae29205462a8e859d1f77
-~
-Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/CommentDTO.java,4\9\49fd7910d3141028f09f7cd168a37b4905293fdd
 {
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/UserDTO.java,e\5\e5c3b23c8c0b4eb7c67f5cf2e6f2ea231ce4ebf5
 è
