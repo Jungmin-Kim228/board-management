@@ -14,7 +14,6 @@ create table Users (
     check_admin boolean not null,
     primary key(user_no)
 );
-
 create table Posts (
 	post_no int not null auto_increment,
     user_no int not null,
@@ -25,7 +24,7 @@ create table Posts (
     post_check_hide boolean not null,
     post_hits int not null,
     file_name varchar(20) not null,
-    file_data blob not null,
+    file_data longblob not null,
     primary key(post_no)
 );
 
