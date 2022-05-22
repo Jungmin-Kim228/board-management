@@ -1,9 +1,6 @@
 package com.nhnacademy.jdbc.board.config;
 
-import com.nhnacademy.jdbc.board.compre.filter.XssEscapeFilter;
 import com.nhnacademy.jdbc.board.compre.filter.XssEscapeServletFilter;
-import com.nhnacademy.jdbc.board.compre.filter.XssEscapeServletFilterWrapper;
-import com.nhnacademy.jdbc.board.compre.filter.defender.XssSaxFilterDefender;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

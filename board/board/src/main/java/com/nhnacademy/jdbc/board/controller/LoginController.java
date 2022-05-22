@@ -1,14 +1,18 @@
 package com.nhnacademy.jdbc.board.controller;
 
+import com.nhnacademy.jdbc.board.compre.dto.UserDTO;
+import com.nhnacademy.jdbc.board.compre.exception.ValidationFailedException;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
@@ -32,14 +36,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("logId") String id,
-                        @RequestParam("logPw") String pw,
+    public String login(@ModelAttribute @Valid UserDTO user,
+                        BindingResult bindingResult,
                         HttpServletRequest req,
                         Model model) {
-        if (userService.successLogin(id, pw)) {
+        if (bindingResult.hasErrors()) {
+            throw new ValidationFailedException(bindingResult);
+        }
+        if (userService.successLogin(user.getId(), user.getPw())) {
             req.getSession(true);
-            req.getSession().setAttribute("id", id);
-            model.addAttribute("user", id);
+            req.getSession().setAttribute("id", user.getId());
+            model.addAttribute("user", user.getId());
             return "index/index";
         }
         return "redirect:/login";
