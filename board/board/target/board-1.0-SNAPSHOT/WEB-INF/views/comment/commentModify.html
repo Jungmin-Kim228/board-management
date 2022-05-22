@@ -6,7 +6,8 @@
 </head>
 <body>
 <form th:action="'/commentModify/' + ${modifyComment.commentNo}" method="post">
-    <span th:text="Content"></span><textarea cols = "50" rows = "10" name="commentContent"></textarea><br/>
+    <span th:text="Content"></span><br />
+    <textarea cols = "50" rows = "10" name="commentContent" th:text="${modifyComment.content}"></textarea><br/>
     <input type="submit" value="Modify">
 </form>
 </body>

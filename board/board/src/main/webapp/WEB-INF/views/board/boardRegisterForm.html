@@ -7,7 +7,8 @@
 <body>
 <form action="/boardRegister" method="post" enctype="multipart/form-data">
     <span th:text="Title"></span><input type="text" name="writeTitle"><br />
-    <span th:text="Content"></span><textarea cols = "50" rows = "10" name="writeContent"></textarea><br/>
+    <span th:text="Content"></span><br />
+    <textarea cols = "50" rows = "10" name="writeContent"></textarea><br/>
     <span th:text="FileUpload"></span><input type="File" name="file"><br />
     <input type="submit" value="Register">
 </form>

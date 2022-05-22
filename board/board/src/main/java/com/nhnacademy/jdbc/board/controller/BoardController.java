@@ -110,7 +110,7 @@ public class BoardController {
                                    HttpServletRequest req,
                                    Model model) {
         if(req.getSession().getAttribute("id").equals(postService.getPost(postNo).get().getWriter())) {
-            model.addAttribute("postNo", postNo);
+            model.addAttribute("post", postService.getPost(postNo).get());
             return "board/boardModifyForm";
         }
         return "redirect:/content?id=" + postNo;
