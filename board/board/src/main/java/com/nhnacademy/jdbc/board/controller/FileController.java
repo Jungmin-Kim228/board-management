@@ -30,7 +30,7 @@ public class FileController {
         try (FileOutputStream fos = new FileOutputStream(downloadPath + filename)) {
             fos.write(file);
         } catch (IOException e) {
-            throw new FileDownloadFailedException(e);
+            throw new FileDownloadFailedException("File Download Failed.");
         }
         return "redirect:/content?id=" + id;
     }
