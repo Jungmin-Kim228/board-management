@@ -28,11 +28,10 @@ public class ContentController {
     private final UserService userService;
     private final CommentService commentService;
     private final PostService postService;
-
     private final ViewService viewService;
 
-    public ContentController(DefaultCommentService commentService, DefaultUserService userService, DefaultPostService postService,
-                             DefaultViewService viewService) {
+    public ContentController(DefaultCommentService commentService, DefaultUserService userService,
+                             DefaultPostService postService, DefaultViewService viewService) {
         this.commentService = commentService;
         this.userService = userService;
         this.postService = postService;

@@ -1,6 +1,7 @@
 package com.nhnacademy.jdbc.board.controller;
 
 import com.nhnacademy.jdbc.board.compre.domain.FileData;
+import com.nhnacademy.jdbc.board.compre.exception.FileDownloadFailedException;
 import com.nhnacademy.jdbc.board.compre.service.FileService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultFileService;
 import java.io.File;
@@ -27,7 +28,7 @@ public class FileController {
         try (FileOutputStream fos = new FileOutputStream(downloadPath + filename)) {
             fos.write(file);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileDownloadFailedException("File Download Failed.");
         }
         return "redirect:/content?id=" + id;
     }
