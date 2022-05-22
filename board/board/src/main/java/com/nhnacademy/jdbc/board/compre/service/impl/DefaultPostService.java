@@ -40,7 +40,7 @@ public class DefaultPostService implements PostService {
         return Optional.of(new PostDTO(pod.getPostNo(),
             pod.getPostTitle(), (userService.getUserId(pod.getUserNo())),
             pod.getPostContent(), pod.getPostWriteDatetime(), pod.getPostModifyDatetime()
-            ,pod.getPostHits(),pod.isPostCheckHide(),pod.getFilename(), pod.getFile()));
+            ,pod.isPostCheckHide(),pod.getFilename(), pod.getFile(), pod.getParent(), pod.getDepth()));
     }
 
 
@@ -55,7 +55,7 @@ public class DefaultPostService implements PostService {
                     postDto.getPostTitle(), postDto.getUserId()
                     , postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                     commentDTO.size(),
-                    postDto.isPostCheckHide()));
+                    postDto.isPostCheckHide(), postDto.getParent(), postDto.getDepth()));
         }
         return postDTOS;
     }
@@ -89,13 +89,26 @@ public class DefaultPostService implements PostService {
     public List<PostDTO> getListPage(final Pagination pagination) {
         List<PostMainView> postDtoList = postMapper.getListPage(pagination);
         List<PostDTO> postDTOS = new ArrayList<>();
+        List<Integer> no = new ArrayList<>();
         for (PostMainView postDto : postDtoList) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
-            postDTOS.add(new PostDTO(postDto.getPostNo(),
-                postDto.getPostTitle(), postDto.getUserId(),
-                "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
-                commentDTO.size(), postDto.isPostCheckHide()
-            ));
+            if (postDto.getDepth() != 0) {
+                postDTOS.add(no.indexOf(postDto.getParent()) + 1, new PostDTO(postDto.getPostNo(),
+                    postDto.getPostTitle(), postDto.getUserId(),
+                    "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                    commentDTO.size(), postDto.isPostCheckHide(), postDto.getParent(),
+                    postDto.getDepth()
+                ));
+                no.add(no.indexOf(postDto.getParent()) + 1,postDto.getPostNo());
+            } else {
+                postDTOS.add(new PostDTO(postDto.getPostNo(),
+                    postDto.getPostTitle(), postDto.getUserId(),
+                    "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                    commentDTO.size(), postDto.isPostCheckHide(), postDto.getParent(),
+                    postDto.getDepth()
+                ));
+                no.add(postDto.getPostNo());
+            }
         }
         return postDTOS;
     }
@@ -107,10 +120,11 @@ public class DefaultPostService implements PostService {
         for (PostMainView postDto : postDTO) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
             postDTOS.add(new ViewPostDTO(postDto.getPostNo(),
+
                 postDto.getPostTitle(), postDto.getUserId(),
                 postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                 commentDTO.size(),
-                postDto.isPostCheckHide()));
+                postDto.isPostCheckHide(),postDto.getParent(), postDto.getDepth()));
         }
         return postDTOS;
     }

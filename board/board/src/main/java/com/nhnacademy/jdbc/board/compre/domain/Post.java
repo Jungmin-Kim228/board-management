@@ -22,7 +22,9 @@ public class Post {
 
     boolean postCheckHide;
 
-    int postHits;
+    int parent;
+
+    int depth;
 
     String filename;
 

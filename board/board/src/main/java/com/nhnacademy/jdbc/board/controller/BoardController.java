@@ -5,12 +5,10 @@ import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
-import com.nhnacademy.jdbc.board.compre.service.RepostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.ViewService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
-import com.nhnacademy.jdbc.board.compre.service.impl.DefaultRepostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import java.io.IOException;
@@ -40,17 +38,14 @@ public class BoardController {
     private final UserService userService;
     private final LikeService likeService;
     private final ViewService viewService;
-    private final RepostService repostService;
 
 
     public BoardController(DefaultPostService postService, DefaultUserService userService,
-                           DefaultLikeService likeService, DefaultViewService viewService,
-                           DefaultRepostService repostService) {
+                           DefaultLikeService likeService, DefaultViewService viewService) {
         this.postService = postService;
         this.userService = userService;
         this.likeService = likeService;
         this.viewService = viewService;
-        this.repostService = repostService;
     }
 
     @GetMapping("/board")
@@ -99,32 +94,45 @@ public class BoardController {
             Integer user = userService.getUser(
                 (String) req.getSession(false).getAttribute("id"));
             postService.register(new PostDTO(title, content,
-                new Timestamp(new Date().getTime()), file.getBytes(), filename), user);
+                new Timestamp(new Date().getTime()), file.getBytes(), filename, 0, 0), user);
+
         } else {
             Integer user = userService.getUser(
                 (String) req.getSession(false).getAttribute("id"));
             postService.register(new PostDTO(title, content,
-                new Timestamp(new Date().getTime())), user);
+                new Timestamp(new Date().getTime()), 0, 0), user);
         }
         return "redirect:/board";
     }
+    @GetMapping("/boardRepost/{postNo}")
+    public String readyBoardRepost(@PathVariable("postNo")int postNo,
+                                   Model model) {
+        model.addAttribute("postNo", postNo);
+        return "/board/boardRepostForm";
+    }
 
-    @PostMapping("/boardRepost")
-    public String boardRepost(@RequestParam("writeTitle") String title,
+    @PostMapping("/boardRepost/{postNo}")
+    public String boardRepost(@PathVariable("postNo")int postNo,
+                              @RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
                                 @RequestParam("file") MultipartFile file,
                                 MultipartHttpServletRequest req) throws IOException {
+        int depth = postService.getPost(postNo).get().getDepth();
+        StringBuilder re = new StringBuilder();
+        for(int i = 0; i < depth + 1; i++) {
+            re.append("re:");
+        }
         if (Objects.nonNull(file)) {
             String filename = file.getOriginalFilename().split("\\\\")[file.getOriginalFilename().split("\\\\").length-1];
             Integer user = userService.getUser(
                 (String) req.getSession(false).getAttribute("id"));
-            postService.register(new PostDTO(title, content,
-                new Timestamp(new Date().getTime()), file.getBytes(), filename), user);
+            postService.register(new PostDTO(re + title, content,
+                new Timestamp(new Date().getTime()), file.getBytes(), filename, postNo, depth+1), user);
         } else {
             Integer user = userService.getUser(
                 (String) req.getSession(false).getAttribute("id"));
-            postService.register(new PostDTO(title, content,
-                new Timestamp(new Date().getTime())), user);
+            postService.register(new PostDTO(re + title, content,
+                new Timestamp(new Date().getTime()), postNo, depth+1), user);
         }
         return "redirect:/board";
     }

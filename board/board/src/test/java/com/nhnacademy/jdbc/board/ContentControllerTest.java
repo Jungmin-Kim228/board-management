@@ -48,7 +48,7 @@ public class ContentControllerTest {
 
     @Test
     void readyBoardContentTest() throws Exception {
-        PostDTO postDTO = new PostDTO("title", "content", new Date());
+        PostDTO postDTO = new PostDTO("title", "content", new Date(), 0, 0);
         CommentDTO commentDTO = new CommentDTO(1, "commentWriter", "commentContent");
         List<CommentDTO> commentDTOS = List.of(commentDTO);
 

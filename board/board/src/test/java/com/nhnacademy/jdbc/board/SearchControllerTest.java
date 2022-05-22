@@ -42,7 +42,7 @@ public class SearchControllerTest {
 
     @Test
     void searchBoardTestIfSessionIsNull() throws Exception {
-        ViewPostDTO postDTO = new ViewPostDTO(1, "title", "writer", new Date(), null, 0, false);
+        ViewPostDTO postDTO = new ViewPostDTO(1, "title", "writer", new Date(), null, 0, false, 0, 0);
         List<ViewPostDTO> postDTOS = List.of(postDTO);
 
         when(postService.searchPost(anyString())).thenReturn(postDTOS);
@@ -60,7 +60,7 @@ public class SearchControllerTest {
     void searchBoardTestIfSessionIsNonNull() throws Exception {
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("id", "user");
-        ViewPostDTO postDTO = new ViewPostDTO(1, "title", "writer", new Date(), null, 0, false);
+        ViewPostDTO postDTO = new ViewPostDTO(1, "title", "writer", new Date(), null, 0, false, 0, 0);
         List<ViewPostDTO> postDTOS = List.of(postDTO);
 
         when(postService.searchPost(anyString())).thenReturn(postDTOS);

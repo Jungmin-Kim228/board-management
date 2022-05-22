@@ -37,10 +37,9 @@
         <td th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${post.viewCount}"></td>
         <td th:text="${post.commentCount}"></td>
-        <form th:action="'/like/' + ${post.id}" method="post">
+        <form th:action="'/boardRepost/' + ${post.id}" method="get">
             <td>
-                <span th:if="${post.isLike}"><input type="submit" name="button" value="unlike"></span>
-                <span th:unless="${post.isLike}"><input type="submit" name="button" value="like"></span>
+                <span th:if="${post.depth} != 5"><input type="submit" name="button" value="repost"></span>
             </td>
         </form>
     </tr>

@@ -1,13 +1,11 @@
 package com.nhnacademy.jdbc.board.compre.dto;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.Objects;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class PostDTO {
 
@@ -19,7 +17,7 @@ public class PostDTO {
 
     private String content;
 
-    private final Date writeDate;
+    private Date writeDate;
 
     private Date modifyDate;
 
@@ -30,16 +28,17 @@ public class PostDTO {
     private boolean isLike;
 
     private int viewCount;
-
-    private int depth;
-
     private byte[] file;
 
     private String filename;
 
+    private int parent;
+
+    private int depth;
+
     public PostDTO(int id, String title, String writer,
                    String content, Date writeDate, Date modifyDate,
-                   int commentCount, boolean checkHide) {
+                   int commentCount, boolean checkHide, int parent, int depth) {
         this.id = id;
         this.title = title;
         this.writer = writer;
@@ -53,17 +52,18 @@ public class PostDTO {
         }
         this.checkHide = checkHide;
         this.isLike = false;
+        this.parent = parent;
+        this.depth = depth;
     }
 
     public PostDTO(int id, String title, String writer,
                    String content, Date writeDate, Date modifyDate,
-                   int commentCount, boolean checkHide, String filename, byte[] file) {
+                   boolean checkHide, String filename, byte[] file, int parent, int depth) {
         this.id = id;
         this.title = title;
         this.writer = writer;
         this.content = content;
         this.writeDate = writeDate;
-        this.commentCount = commentCount;
         if(Objects.isNull(modifyDate)) {
             this.modifyDate = writeDate;
         } else {
@@ -73,19 +73,25 @@ public class PostDTO {
         this.isLike = false;
         this.filename = filename;
         this.file = file;
+        this.parent = parent;
+        this.depth = depth;
     }
 
-    public PostDTO(String title, String content, Date writeDate, byte[] file, String filename) {
+    public PostDTO(String title, String content, Date writeDate, byte[] file, String filename, int parent, int depth) {
         this.title = title;
         this.content = content;
         this.writeDate = writeDate;
         this.file = file;
         this.filename = filename;
+        this.parent = parent;
+        this.depth = depth;
     }
 
-    public PostDTO(String title, String content, Date writeDate) {
+    public PostDTO(String title, String content, Date writeDate, int parent, int depth) {
         this.title = title;
         this.content = content;
         this.writeDate = writeDate;
+        this.parent = parent;
+        this.depth = depth;
     }
 }

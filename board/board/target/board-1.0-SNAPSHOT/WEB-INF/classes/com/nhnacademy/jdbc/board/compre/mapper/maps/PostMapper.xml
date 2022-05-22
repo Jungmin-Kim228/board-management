@@ -6,14 +6,14 @@
 <mapper namespace="com.nhnacademy.jdbc.board.compre.mapper.PostMapper">
     <select id="selectPost" resultType="com.nhnacademy.jdbc.board.compre.domain.Post">
         SELECT post_no AS postNo, user_no AS userNo, post_title AS postTitle, post_content AS postContent,
-               post_write_datetime AS postWriteDatetime, post_modify_datetime AS postModifyDatetime, post_check_hide AS postCheckHide, post_hits AS postHits
-               ,file_name AS filename, file_data AS file
+               post_write_datetime AS postWriteDatetime, post_modify_datetime AS postModifyDatetime, post_check_hide AS postCheckHide
+               ,file_name AS filename, file_data AS file, parent AS parent, re_depth AS depth
         FROM Posts
         WHERE post_no = #{id}
     </select>
 
     <select id="selectPosts" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
-        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide
         FROM Posts AS A
                  INNER JOIN Users AS B
                             ON A.user_no = B.user_no
@@ -21,8 +21,8 @@
     </select>
 
     <insert id="postRegister">
-        INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, post_hits, file_name, file_data)
-        VALUES (#{num}, #{Post.title}, #{Post.content}, #{Post.writeDate} , false, 0, #{Post.filename}, #{Post.file})
+        INSERT INTO Posts(user_no, post_title, post_content, post_write_datetime, post_check_hide, file_name, file_data, parent, re_depth)
+        VALUES (#{num}, #{Post.title}, #{Post.content}, #{Post.writeDate} , false, #{Post.filename}, #{Post.file}, #{Post.parent}, #{Post.depth})
     </insert>
 
     <update id="postUpdate">
@@ -43,7 +43,7 @@
     </select>
 
     <select id="getListPage" parameterType="com.nhnacademy.jdbc.board.compre.domain.Pagination" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
-        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.parent AS parent, A.re_depth AS depth
         FROM Posts AS A
         INNER JOIN Users AS B
             ON A.user_no = B.user_no
@@ -52,7 +52,7 @@
     </select>
 
     <select id="searchPost" resultType="com.nhnacademy.jdbc.board.compre.domain.PostMainView">
-        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.post_hits AS postHits
+        SELECT A.post_no AS postNo, B.user_id AS userId, A.post_title AS postTitle, A.post_write_datetime AS postWriteDatetime, A.post_check_hide AS postCheckHide, A.parent AS parent, A.re_depth AS depth
         FROM Posts AS A
                  INNER JOIN Users AS B
                             ON A.user_no = B.user_no

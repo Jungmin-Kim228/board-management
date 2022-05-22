@@ -45,7 +45,7 @@ public class LikeControllerTest {
 
     @Test
     void likesViewTest() throws Exception {
-        ViewPostDTO viewPostDTO = new ViewPostDTO(1, "title", "writer", new Date(), null, 0, false);
+        ViewPostDTO viewPostDTO = new ViewPostDTO(1, "title", "writer", new Date(), null, 0, false, 0, 0);
         List<ViewPostDTO> postDTOS = List.of(viewPostDTO);
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("id", "user");

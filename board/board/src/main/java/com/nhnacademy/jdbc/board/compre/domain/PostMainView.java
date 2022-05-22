@@ -19,5 +19,7 @@ public class PostMainView {
 
     boolean postCheckHide;
 
-    int postHits;
+    int parent;
+
+    int depth;
 }

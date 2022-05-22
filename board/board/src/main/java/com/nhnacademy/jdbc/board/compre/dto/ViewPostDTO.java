@@ -26,7 +26,11 @@ public class ViewPostDTO {
 
     private boolean isLike;
 
-    public ViewPostDTO(int id, String title, String writer, Date writeDate, Date modifyDate, int commentCount, boolean checkHide) {
+    private int parent;
+
+    private int depth;
+
+    public ViewPostDTO(int id, String title, String writer, Date writeDate, Date modifyDate, int commentCount, boolean checkHide, int parent, int depth) {
         this.id = id;
         this.title = title;
         this.writer = writer;
@@ -39,6 +43,8 @@ public class ViewPostDTO {
         }
         this.checkHide = checkHide;
         this.isLike = false;
+        this.parent = parent;
+        this.depth = depth;
     }
 
     public ViewPostDTO(String title, Date writeDate) {
