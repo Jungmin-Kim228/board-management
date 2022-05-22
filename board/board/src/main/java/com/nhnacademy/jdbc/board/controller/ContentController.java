@@ -39,11 +39,12 @@ public class ContentController {
     }
 
     @GetMapping("/content")
-    public String readyBoardContent(@RequestParam("id") int id,
-                                    HttpServletRequest req,
+    public String readyBoardContent(@RequestParam("id") int id, HttpServletRequest req,
                                     Model model) {
-        if(Objects.nonNull(req.getSession(false)) &&!viewService.isView(id, String.valueOf(req.getSession(false).getAttribute("id")))) {
-            viewService.insertView(id, userService.getUser(String.valueOf(req.getSession(false).getAttribute("id"))));
+        if (Objects.nonNull(req.getSession(false)) &&
+            !viewService.isView(id, String.valueOf(req.getSession(false).getAttribute("id")))) {
+            viewService.insertView(id,
+                userService.getUser(String.valueOf(req.getSession(false).getAttribute("id"))));
         }
         PostDTO postDTO = postService.getPost(id).get();
         List<CommentDTO> commentDTO = commentService.getComments(id);
@@ -56,7 +57,8 @@ public class ContentController {
     public String commentRegister(@RequestParam("id") int id,
                                   @RequestParam("comment") String comment,
                                   HttpServletRequest req) {
-        commentService.register(id,userService.getUser((String)req.getSession(false).getAttribute("id")) ,comment);
+        commentService.register(id,
+            userService.getUser((String) req.getSession(false).getAttribute("id")), comment);
         return "redirect:/content?id=" + id;
     }
 
@@ -68,7 +70,7 @@ public class ContentController {
         Comment com = commentService.getComment(commentNo).get();
         CommentDTO commentDTO = new CommentDTO(com.getCommentNo(),
             userService.getUserId(com.getUserNo()), com.getCommentContent());
-        if((commentDTO.getCommentWriter().equals(req.getSession(false).getAttribute("id")))) {
+        if ((commentDTO.getCommentWriter().equals(req.getSession(false).getAttribute("id")))) {
             if (button.equals("Modify")) {
                 model.addAttribute("modifyComment", commentDTO);
                 return "comment/commentModify";

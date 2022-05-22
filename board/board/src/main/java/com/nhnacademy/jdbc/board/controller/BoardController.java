@@ -87,7 +87,7 @@ public class BoardController {
     @PostMapping("/boardRegister")
     public String boardRegister(@RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
-                                @RequestParam("file") MultipartFile file,
+                                @RequestParam(value = "file", required = false) MultipartFile file,
                                 MultipartHttpServletRequest req) throws IOException {
         if (Objects.nonNull(file)) {
             String filename = file.getOriginalFilename().split("\\\\")[file.getOriginalFilename().split("\\\\").length-1];
@@ -95,7 +95,6 @@ public class BoardController {
                 (String) req.getSession(false).getAttribute("id"));
             postService.register(new PostDTO(title, content,
                 new Timestamp(new Date().getTime()), file.getBytes(), filename, 0, 0), user);
-
         } else {
             Integer user = userService.getUser(
                 (String) req.getSession(false).getAttribute("id"));
@@ -104,6 +103,7 @@ public class BoardController {
         }
         return "redirect:/board";
     }
+
     @GetMapping("/boardRepost/{postNo}")
     public String readyBoardRepost(@PathVariable("postNo")int postNo,
                                    Model model) {
@@ -115,7 +115,7 @@ public class BoardController {
     public String boardRepost(@PathVariable("postNo")int postNo,
                               @RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
-                                @RequestParam("file") MultipartFile file,
+                                @RequestParam(value = "file", required = false) MultipartFile file,
                                 MultipartHttpServletRequest req) throws IOException {
         int depth = postService.getPost(postNo).get().getDepth();
         StringBuilder re = new StringBuilder();
