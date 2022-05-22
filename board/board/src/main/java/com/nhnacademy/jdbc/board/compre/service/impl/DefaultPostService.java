@@ -94,15 +94,14 @@ public class DefaultPostService implements PostService {
         for (PostMainView postDto : postDtoList) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
             if (postDto.getDepth() != 0) {
-                int depthCount = checkCount(postDTOS, postDto.getParent());
-                postDTOS.add(no.indexOf(postDto.getParent()) + depthCount,
+                postDTOS.add(no.indexOf(postDto.getParent()) + 1,
                     new PostDTO(postDto.getPostNo(),
-                    postDto.getPostTitle(), postDto.getUserId(),
-                    "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
-                    commentDTO.size(), postDto.isPostCheckHide(), postDto.getParent(),
-                    postDto.getDepth()
-                ));
-                no.add(no.indexOf(postDto.getParent()) + depthCount,postDto.getPostNo());
+                        postDto.getPostTitle(), postDto.getUserId(),
+                        "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
+                        commentDTO.size(), postDto.isPostCheckHide(), postDto.getParent(),
+                        postDto.getDepth()
+                    ));
+                no.add(no.indexOf(postDto.getParent()) + 1, postDto.getPostNo());
             } else {
                 postDTOS.add(new PostDTO(postDto.getPostNo(),
                     postDto.getPostTitle(), postDto.getUserId(),
@@ -114,16 +113,6 @@ public class DefaultPostService implements PostService {
             }
         }
         return postDTOS;
-    }
-
-    private int checkCount(List<PostDTO> postDTOS, int p) {
-        int result = 1;
-        for(PostDTO postDTO : postDTOS) {
-            if(postDTO.getParent() == p) {
-                result++;
-            }
-        }
-        return result;
     }
 
     @Override
