@@ -31,6 +31,8 @@ public class PostDTO {
 
     private int viewCount;
 
+    private int depth;
+
     private byte[] file;
 
     private String filename;

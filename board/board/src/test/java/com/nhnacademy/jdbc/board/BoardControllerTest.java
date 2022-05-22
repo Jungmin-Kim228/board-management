@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultRepostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import com.nhnacademy.jdbc.board.controller.BoardController;
@@ -19,6 +20,7 @@ public class BoardControllerTest {
     private DefaultUserService userService;
     private DefaultLikeService likeService;
     private DefaultViewService viewService;
+    private DefaultRepostService repostService;
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -27,7 +29,9 @@ public class BoardControllerTest {
         userService = mock(DefaultUserService.class);
         likeService = mock(DefaultLikeService.class);
         viewService = mock(DefaultViewService.class);
-        mockMvc = MockMvcBuilders.standaloneSetup(new BoardController(postService, userService, likeService, viewService)).build();
+        repostService = mock(DefaultRepostService.class);
+        mockMvc = MockMvcBuilders.standaloneSetup(new BoardController(postService, userService, likeService, viewService,
+            repostService)).build();
     }
 
     @Test

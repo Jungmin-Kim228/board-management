@@ -17,8 +17,6 @@ Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Like.java,6\
 Qboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Pagination.java,6\a\6a4224b033d219b9b9fa61cd5b8fd5aa3a00d4e8
 {
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/UserDTO.java,e\5\e5c3b23c8c0b4eb7c67f5cf2e6f2ea231ce4ebf5
-ƒ
-Sboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/PostMainView.java,3\4\34c1c3ccd129872ef0f3c8003fcf97898bbe1dfd
 
 Oboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/FileData.java,e\6\e61200744a16278b78b9193b918418a1a88a5d4d
 y
@@ -39,8 +37,6 @@ l
 <board/board/src/main/webapp/WEB-INF/views/like/likeView.html,6\6\662d5ae2403a431ac70d927aaf081df96ff5337d
 ~
 Nboard/board/src/test/java/com/nhnacademy/jdbc/board/ContentControllerTest.java,c\b\cbcb38018b56681c848064170b4863c30bc63cfb
-|
-Lboard/board/src/test/java/com/nhnacademy/jdbc/board/BoardControllerTest.java,8\6\869569e741be030a440cbdeb529d63a915d7d72f
 {
 Kboard/board/src/test/java/com/nhnacademy/jdbc/board/LikeControllerTest.java,8\9\897da34b1a1b4bfd21d3ffc8c92d171fda50dbb8
 {
@@ -63,8 +59,6 @@ Sboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/IndexController.
 Rboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/FileController.java,3\4\3471a1e7aed91e1ced41bd19b1b01750b38c07c1
 …
 Uboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/ContentController.java,0\d\0d29b000657c3830febed8498207d9702b9ada5a
-ƒ
-Sboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/ViewService.java,4\7\479cbba6b7067a3180f18ff7d351ae5fc22a1e4a
 ƒ
 Sboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/service/UserService.java,6\8\68dc3498a052f0bf4152f5d5d2faafc03db2e7da
 ƒ
@@ -97,7 +91,5 @@ Qboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/mapper/ViewMapper.ja
 Oboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/ViewPostDTO.java,c\b\cb5747684ff4383acb9b57d6ab1fa5cbb98b4277
 C
 board/board/pom.xml,d\d\dd18d7a34156b1a580b12fc7c876c80edae336c3
-ˆ
-Xboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/filter/defender/Defender.java,6\8\684c2598cfe44e35f17ced3ed5529b3542e001e8
 ‘
 aboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/filter/defender/XssFilterDefender.java,a\2\a2564bdb85caef0b3f07dac0f46f5b9e695d3a1c

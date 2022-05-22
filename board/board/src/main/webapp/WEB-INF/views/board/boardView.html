@@ -22,6 +22,7 @@
         <th>WriteDate</th>
         <th>ViewCount</th>
         <th>CommentCount</th>
+        <th>WriteRepost</th>
     </tr>
     <tr align="center" th:each="post : ${allPost}">
         <form th:action="'/like/' + ${post.id}" method="post">
@@ -36,6 +37,12 @@
         <td th:text="${#dates.format(post.writeDate,'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${post.viewCount}"></td>
         <td th:text="${post.commentCount}"></td>
+        <form th:action="'/like/' + ${post.id}" method="post">
+            <td>
+                <span th:if="${post.isLike}"><input type="submit" name="button" value="unlike"></span>
+                <span th:unless="${post.isLike}"><input type="submit" name="button" value="like"></span>
+            </td>
+        </form>
     </tr>
 </table>
 <div id="paginationDiv" align="center">

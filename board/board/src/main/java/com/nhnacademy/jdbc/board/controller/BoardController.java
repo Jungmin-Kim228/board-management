@@ -5,10 +5,12 @@ import com.nhnacademy.jdbc.board.compre.dto.PostDTO;
 import com.nhnacademy.jdbc.board.compre.dto.ViewPostDTO;
 import com.nhnacademy.jdbc.board.compre.service.LikeService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
+import com.nhnacademy.jdbc.board.compre.service.RepostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import com.nhnacademy.jdbc.board.compre.service.ViewService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultLikeService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultPostService;
+import com.nhnacademy.jdbc.board.compre.service.impl.DefaultRepostService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultViewService;
 import java.io.IOException;
@@ -37,16 +39,18 @@ public class BoardController {
     private final PostService postService;
     private final UserService userService;
     private final LikeService likeService;
-
     private final ViewService viewService;
+    private final RepostService repostService;
 
 
     public BoardController(DefaultPostService postService, DefaultUserService userService,
-                           DefaultLikeService likeService, DefaultViewService viewService) {
+                           DefaultLikeService likeService, DefaultViewService viewService,
+                           DefaultRepostService repostService) {
         this.postService = postService;
         this.userService = userService;
         this.likeService = likeService;
         this.viewService = viewService;
+        this.repostService = repostService;
     }
 
     @GetMapping("/board")
@@ -87,6 +91,26 @@ public class BoardController {
 
     @PostMapping("/boardRegister")
     public String boardRegister(@RequestParam("writeTitle") String title,
+                                @RequestParam("writeContent") String content,
+                                @RequestParam("file") MultipartFile file,
+                                MultipartHttpServletRequest req) throws IOException {
+        if (Objects.nonNull(file)) {
+            String filename = file.getOriginalFilename().split("\\\\")[file.getOriginalFilename().split("\\\\").length-1];
+            Integer user = userService.getUser(
+                (String) req.getSession(false).getAttribute("id"));
+            postService.register(new PostDTO(title, content,
+                new Timestamp(new Date().getTime()), file.getBytes(), filename), user);
+        } else {
+            Integer user = userService.getUser(
+                (String) req.getSession(false).getAttribute("id"));
+            postService.register(new PostDTO(title, content,
+                new Timestamp(new Date().getTime())), user);
+        }
+        return "redirect:/board";
+    }
+
+    @PostMapping("/boardRepost")
+    public String boardRepost(@RequestParam("writeTitle") String title,
                                 @RequestParam("writeContent") String content,
                                 @RequestParam("file") MultipartFile file,
                                 MultipartHttpServletRequest req) throws IOException {
