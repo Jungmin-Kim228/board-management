@@ -13,8 +13,6 @@ Nboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Comment.java
 Zboard/board/src/main/java/com/nhnacademy/jdbc/board/interceptor/LoginCheckInterceptor.java,1\0\10658738ca9b7f0ce80fafc7c13062832959a90f
 {
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Like.java,6\8\683fd7d2aca3cdcffb2376c27e2fc87f6d3c1581
-Å
-Qboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/Pagination.java,6\a\6a4224b033d219b9b9fa61cd5b8fd5aa3a00d4e8
 {
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/dto/UserDTO.java,e\5\e5c3b23c8c0b4eb7c67f5cf2e6f2ea231ce4ebf5
 
@@ -23,8 +21,6 @@ y
 Iboard/board/src/main/java/com/nhnacademy/jdbc/board/config/WebConfig.java,3\8\38749ad4a92ad4f6d50ca6056c097a648f7961ae
 Ö
 Uboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/mapper/maps/FileMapper.xml,2\c\2c69d91d170a54334cd4a6e25bb863b9326aaf46
-Ö
-Uboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/mapper/maps/LikeMapper.xml,4\c\4c53aea735f7e567e79b89b40f4b6dd55813da43
 {
 Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/User.java,d\7\d7d846b0d13c08f7ea8ae29205462a8e859d1f77
 Ö
@@ -39,8 +35,6 @@ Kboard/board/src/main/java/com/nhnacademy/jdbc/board/compre/domain/View.java,0\
 Wboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/WebControllerAdvice.java,4\4\44601d0e07596a3d53f1fef12f03182ac60a017f
 Ç
 Rboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/LikeController.java,c\a\ca378d84389c3c3dd7bdd58b968103e62cef1238
-É
-Sboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/LoginController.java,6\4\64de1c0c2a2ca86f50ec934439ef3f8d42225acb
 É
 Sboard/board/src/main/java/com/nhnacademy/jdbc/board/controller/IndexController.java,6\a\6a6dc3e81ba7ccaa8c410644a9b31d1b8b7f2f52
 Ç

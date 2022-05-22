@@ -11,6 +11,7 @@ import com.nhnacademy.jdbc.board.compre.service.CommentService;
 import com.nhnacademy.jdbc.board.compre.service.PostService;
 import com.nhnacademy.jdbc.board.compre.service.UserService;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -73,6 +74,7 @@ public class DefaultPostService implements PostService {
     @Override
     public void delete(int id) {
         postMapper.postDelete(id);
+        postMapper.repostDelete(id);
     }
 
     @Override
@@ -93,13 +95,15 @@ public class DefaultPostService implements PostService {
         for (PostMainView postDto : postDtoList) {
             List<CommentDTO> commentDTO = commentService.getComments(postDto.getPostNo());
             if (postDto.getDepth() != 0) {
-                postDTOS.add(no.indexOf(postDto.getParent()) + 1, new PostDTO(postDto.getPostNo(),
+                int depthCount = checkCount(postDTOS, postDto.getParent());
+                postDTOS.add(no.indexOf(postDto.getParent()) + depthCount,
+                    new PostDTO(postDto.getPostNo(),
                     postDto.getPostTitle(), postDto.getUserId(),
                     "", postDto.getPostWriteDatetime(), postDto.getPostModifyDatetime(),
                     commentDTO.size(), postDto.isPostCheckHide(), postDto.getParent(),
                     postDto.getDepth()
                 ));
-                no.add(no.indexOf(postDto.getParent()) + 1,postDto.getPostNo());
+                no.add(no.indexOf(postDto.getParent()) + depthCount,postDto.getPostNo());
             } else {
                 postDTOS.add(new PostDTO(postDto.getPostNo(),
                     postDto.getPostTitle(), postDto.getUserId(),
@@ -111,6 +115,16 @@ public class DefaultPostService implements PostService {
             }
         }
         return postDTOS;
+    }
+
+    private int checkCount(List<PostDTO> postDTOS, int p) {
+        int result = 1;
+        for(PostDTO postDTO : postDTOS) {
+            if(postDTO.getParent() == p) {
+                result++;
+            }
+        }
+        return result;
     }
 
     @Override

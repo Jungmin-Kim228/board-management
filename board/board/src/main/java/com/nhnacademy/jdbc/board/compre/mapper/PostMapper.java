@@ -25,6 +25,8 @@ public interface PostMapper {
 
     void postDelete(@Param("id") int id);
 
+    void repostDelete(@Param("id") int id);
+
     void postRecover(@Param("id") int id);
 
     int postCount();

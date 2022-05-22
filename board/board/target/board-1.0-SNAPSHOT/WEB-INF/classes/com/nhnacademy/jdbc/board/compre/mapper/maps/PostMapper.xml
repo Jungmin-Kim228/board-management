@@ -34,6 +34,10 @@
         UPDATE Posts SET post_check_hide=1 WHERE post_no = #{id}
     </update>
 
+    <delete id="repostDelete">
+        DELETE FROM Posts WHERE parent = #{id}
+    </delete>
+
     <update id="postRecover">
         UPDATE Posts SET post_check_hide=0 WHERE post_no = #{id}
     </update>
