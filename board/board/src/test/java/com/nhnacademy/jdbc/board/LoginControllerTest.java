@@ -1,12 +1,14 @@
 package com.nhnacademy.jdbc.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import com.nhnacademy.jdbc.board.compre.dto.UserDTO;
 import com.nhnacademy.jdbc.board.compre.service.impl.DefaultUserService;
 import com.nhnacademy.jdbc.board.controller.LoginController;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,31 +30,31 @@ public class LoginControllerTest {
 
     @Test
     void loginSuccessTest() throws Exception {
-        String id = "user";
-        String pw = "useruser";
+        UserDTO user = new UserDTO("user", "123");
+        user.setUserNum(1);
+        when(userService.successLogin(anyString(), anyString())).thenReturn(true);
 
-        when(userService.successLogin(id, pw)).thenReturn(true);
-
-        MvcResult mvcResult = mockMvc.perform(
-                                         post("/login")
-                                             .param("logId", id)
-                                             .param("logPw", pw))
+        MvcResult mvcResult = mockMvc.perform(post("/login")
+                                         .param("userNum", String.valueOf(user.getUserNum()))
+                                         .param("id", user.getId())
+                                         .param("pw", user.getPw()))
                                      .andExpect(view().name("index/index"))
                                      .andReturn();
 
         assertThat(mvcResult.getRequest().getSession(false).getAttribute("id")).isEqualTo("user");
+        assertThat(mvcResult.getModelAndView().getModel().get("user")).isEqualTo("user");
     }
 
     @Test
     void loginFailedTest() throws Exception {
-        String id = "user";
-        String pw = "uuuu";
-
-        when(userService.successLogin(id, pw)).thenReturn(false);
+        UserDTO user = new UserDTO("user", "wrong");
+        user.setUserNum(1);
+        when(userService.successLogin(anyString(), anyString())).thenReturn(false);
 
         MvcResult mvcResult = mockMvc.perform(post("/login")
-                                         .param("logId", id)
-                                         .param("logPw", pw))
+                                         .param("userNum", String.valueOf(user.getUserNum()))
+                                         .param("id", user.getId())
+                                         .param("pw", user.getPw()))
                                      .andExpect(view().name("redirect:/login"))
                                      .andReturn();
 

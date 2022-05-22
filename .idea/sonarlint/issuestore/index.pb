@@ -1,7 +1,5 @@
 
 |
-Lboard/board/src/test/java/com/nhnacademy/jdbc/board/LoginControllerTest.java,0\5\054a4ecd6627d5ead448f02da8f4a7139652a72e
-|
 Lboard/board/src/test/java/com/nhnacademy/jdbc/board/IndexControllerTest.java,e\b\eb58e4e48250da9786189aedbd87cbd7cf7320f2
 j
 :board/board/src/main/webapp/WEB-INF/views/index/index.html,4\6\46988af0802e96a940c8d94b11318ca6afcc12d8
