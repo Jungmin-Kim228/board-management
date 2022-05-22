@@ -1,6 +1,10 @@
 package com.nhnacademy.jdbc.board;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -66,6 +70,9 @@ public class BoardControllerTest {
 
     @Test
     void boardRecoverTest() throws Exception {
+        doNothing().when(postService).recover(anyInt());
 
+        mockMvc.perform(post("/boardRecover/1"))
+            .andExpect(view().name("redirect:/boardRecover"));
     }
 }
